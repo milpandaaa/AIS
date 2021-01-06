@@ -1,22 +1,233 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="${title}"></title>
-        <meta charset="utf-8">
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    </head>
+<head th:insert="blocks/bootstrap::css"></head>
 <body>
-<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <p class="h5 my-0 me-md-auto fw-normal">Company name</p>
-    <nav class="my-2 my-md-0 me-md-3" >
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">Support</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
-</header>
+<div th:insert="blocks/header::header"></div>
 <p th:text="'Hello, ' + ${title} + '!'" />
+<!--<main role="main">-->
+<!--    <div class="container">-->
+<!--&lt;!&ndash;        <h3 class="display-3">Hello, world!</h3>&ndash;&gt;-->
+
+<!--        <label>Номер дела</label>-->
+<!--            <div class="form-row">-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <input type="number" class="form-control">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <input type="number" class="form-control">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <input type="number" class="form-control">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <input type="number" class="form-control">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <button type="submit" class="btn btn-warning" style="position: absolute;left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <button type="submit" class="btn btn-dark" style="position: absolute;left: 50%;"><i class="fa fa-sign-in"></i> Создать </button>-->
+<!--            </div>-->
+<!--            </div>-->
+<!--        <hr style="background-color:#82C0CC">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-4">-->
+
+<!--                <label class="control-label col-sm-2 requiredField" for="lastName">Фамилия</label>-->
+<!--                <input type="text" class="form-control" name="last_name" placeholder="Фамилия" id="lastName">-->
+
+<!--                <label class="control-label col-sm-2 requiredField" for="name">Имя</label>-->
+<!--                <select class="custom-select" name="first_name" id="name" required>-->
+<!--                    <option selected disabled value="">Выберете имя</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+
+<!--                <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>-->
+<!--                <select class="custom-select" name="patronymic" id="patronymic" required>-->
+<!--                    <option selected disabled value="">Выберете отчество</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+
+<!--                <label class="control-label col-sm-2 requiredField" for="date">-->
+<!--                    Date-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_birth" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+
+<!--                <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>-->
+<!--                <select class="custom-select" id="sex" name="gender" required>-->
+<!--                    <option selected disabled value="">Выберете пол</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+
+<!--                <label for="country" style="padding-left:15px;">Место регистрации</label>-->
+<!--                <select class="custom-select" id="country" name="county" required>-->
+<!--                    <option selected disabled value="">Страна</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="form-control" style="margin-top:15px;" placeholder="Номер региона" id="region" name="region">-->
+<!--                <input type="text" class="form-control" style="margin-top:15px;" placeholder="Адрес" id="outdoors" name="outdoors">-->
+<!--            </div>-->
+
+<!--            <div class="col-md-4">-->
+<!--                <label >-->
+<!--                    Совершение правонарушений-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_commission" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" placeholder="Место правонарушения">-->
+<!--                <hr style="background-color:#82C0CC">-->
+
+<!--                <label>-->
+<!--                    Возбуждение дела-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_initiation" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" required>-->
+<!--                    <option selected disabled value="">Выберете ОИАЗ</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="form-control" name="name_of_initiation" style="margin-top:15px;" placeholder="Должностное лицо">-->
+<!--                <hr style="background-color:#82C0CC">-->
+
+<!--                <label>-->
+<!--                    Составление протокола по делу-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" required>-->
+<!--                    <option selected disabled value="">Выберете ОИАЗ</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="form-control" name="name_of_preparing_report" style="margin-top:15px;" placeholder="Должностное лицо">-->
+<!--                <select class="custom-select" name="article" style="margin-top:15px;" required>-->
+<!--                    <option selected disabled value="">Выберете номер статьи Кодекса Российской Федерации об административных правонарушениях</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <hr style="background-color:#82C0CC">-->
+
+<!--                <label>-->
+<!--                    Решение-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_decision" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <select class="custom-select" name="office_of_decision"style="margin-top:15px;" required>-->
+<!--                    <option selected disabled value="">Выберете ОИАЗ</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="form-control" name="name_of_decision" style="margin-top:15px;" placeholder="Должностное лицо">-->
+<!--                <input type="text" class="form-control" name="decision" style="margin-top:15px;" placeholder="Решение">-->
+<!--                <select class="custom-select" name="punishment" style="margin-top:15px;" required>-->
+<!--                    <option selected disabled value="">Выберете вид наказания</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="form-control" name="sum" style="margin-top:15px;" placeholder="Штраф">-->
+<!--                <hr style="background-color:#82C0CC">-->
+
+<!--                <label>-->
+<!--                    Дата вступления в силу решения-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_of_entry_into_force" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <hr style="background-color:#82C0CC">-->
+
+<!--                <label>-->
+<!--                    Исполение-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <input class="form-control" id="date" name="date_sentence_enforcement" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+
+<!--                <input type="text" class="form-control" name="amount" style="margin-top:15px;" placeholder="Сумма оплаты штрафа">-->
+
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <label>-->
+<!--                    Передача по подведомственности-->
+<!--                </label>-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <p style="margin-top:15px;margin-right:15px">От:</p>-->
+<!--                    <input class="form-control" id="date" name="date_departure" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <select class="custom-select" name="office_departure" required>-->
+<!--                    <option selected disabled value="">Выберете ОИАЗ</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--                <div class="input-group" >-->
+<!--                    <div class="input-group-addon">-->
+<!--                        <i class="fa fa-calendar">-->
+<!--                        </i>-->
+<!--                    </div>-->
+<!--                    <p style="margin-top:30px;margin-right:15px">Кому:</p>-->
+<!--                    <input style="margin-top:15px;" class="form-control" id="date" name="date_arrival" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--                </div>-->
+<!--                <select class="custom-select" name="office_arrival" required>-->
+<!--                    <option selected disabled value="">Выберете ОИАЗ</option>-->
+<!--                    <option>...</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <hr style="background-color:#82C0CC">-->
+<!--    </div>-->
+
+<!--</main>-->
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
+
+<!--<script>-->
+<!--	$(document).ready(function(){-->
+<!--		var date_input=$('input[id="date"]');-->
+<!--		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";-->
+<!--		date_input.datepicker({-->
+<!--			format: 'yyyy-mm-dd',-->
+<!--			container: container,-->
+<!--			todayHighlight: true,-->
+<!--			autoclose: true,-->
+<!--		})-->
+<!--	})-->
+<!--</script>-->
+<div th:insert="blocks/bootstrap::script"></div>
 </body>
 </html>

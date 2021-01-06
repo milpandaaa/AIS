@@ -13,5 +13,11 @@ class MainController{
         model.addAttribute("title", "Главная страница");//передаем параметры
         return "main";//переход на шаблон main.html
     }
+    @GetMapping("/new")
+    public String add(Model model) {//всегда принимает модель
+        model.addAttribute("title", "Добавление");//передаем параметры
+        return "add";//переход на шаблон main.html
+    }
+
 
 }
