@@ -1,6 +1,25 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="blocks/bootstrap::css"></head>
+<head>
+<meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+
+
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">-->
+<!--        <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">-->
+
+</head>
 <body>
 <div th:insert="blocks/header::header"></div>
 <p th:text="'Hello, ' + ${title} + '!'" />
@@ -24,7 +43,7 @@
                 <input type="number" class="form-control">
             </div>
             <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-warning" style="position: flex;left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>
+                <button class="btn btn-warning" style="position: flex;left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>
             </div>
             <div class="form-group col-md-2">
                 <button type="submit" class="btn btn-dark" style="position: flex;left: 50%;"><i class="fa fa-sign-in"></i> Создать </button>
@@ -62,7 +81,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input onchange="checkNow(date_of_birth)" class="form-control" id="date" name="date_of_birth" placeholder="YYYY-MM-DD" type="text"/>
+                    <input onchange="checkLessDateNow('date_of_birth')" class="form-control" id="date" name="date_of_birth" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
 
                 <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>
@@ -84,12 +103,14 @@
                 <label >
                     Совершение правонарушений
                 </label>
+                <input type="text" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" name="time_of_commission" data-target="#datetimepicker3" placeholder="HH:MM:SS" />
+
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" onchange="checkNowWithTime()" name="date_of_commission" placeholder="YYYY-MM-DD HH:MM:SS" type="text"/>
+                    <input class="form-control" id="date" onchange="checkLessDateNow('date_of_commission')" name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;"/>
                 </div>
                 <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" placeholder="Место правонарушения">
                 <hr style="background-color:#82C0CC">
@@ -102,7 +123,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" name="date_of_initiation" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_of_initiation', 'date_of_commission')" name="date_of_initiation" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" required>
                     <option selected disabled value="">Выберете ОИАЗ</option>
@@ -119,7 +140,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_of_preparing_report', 'date_of_initiation')" name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" required>
                     <option selected disabled value="">Выберете ОИАЗ</option>
@@ -140,7 +161,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" name="date_of_decision" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_of_decision', 'date_of_initiation')" name="date_of_decision" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_decision"style="margin-top:15px;" required>
                     <option selected disabled value="">Выберете ОИАЗ</option>
@@ -163,7 +184,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" name="date_of_entry_into_force" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_of_entry_into_force', 'date_of_decision')" name="date_of_entry_into_force" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <hr style="background-color:#82C0CC">
 
@@ -175,7 +196,7 @@
                         <i class="fa fa-calendar">
                         </i>
                     </div>
-                    <input class="form-control" id="date" name="date_sentence_enforcement" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_sentence_enforcement', 'date_of_entry_into_force')" name="date_sentence_enforcement" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
 
                 <input type="text" class="form-control" name="amount" style="margin-top:15px;" placeholder="Сумма оплаты штрафа">
@@ -191,7 +212,7 @@
                         </i>
                     </div>
                     <p style="margin-top:15px;margin-right:15px">От:</p>
-                    <input class="form-control" id="date" name="date_departure" placeholder="YYYY-MM-DD" type="text"/>
+                    <input class="form-control" id="date" onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_departure" required>
                     <option selected disabled value="">Выберете ОИАЗ</option>
@@ -203,7 +224,7 @@
                         </i>
                     </div>
                     <p style="margin-top:30px;margin-right:15px">Кому:</p>
-                    <input style="margin-top:15px;" class="form-control" id="date" name="date_arrival" placeholder="YYYY-MM-DD" type="text"/>
+                    <input style="margin-top:15px;" class="form-control" id="date" onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_arrival" required>
                     <option selected disabled value="">Выберете ОИАЗ</option>
@@ -215,7 +236,6 @@
     </div>
 
 </main>
-<div th:insert="blocks/bootstrap::script"></div>
 <script>
 	$(document).ready(function(){
 		var date_input=$('input[id="date"]');
@@ -227,46 +247,54 @@
 			autoclose: true,
 		})
 	})
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'HH:mm:ss'
+        });
+    });
 
-    function checkNowWithTime(){
-        var date = document.getElementsByName("date_of_commission")[0];
-        if (date.value!=null) {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            var hh = today.getHours();
-            var mm = today.getMinutes();
-            var ss = today.getSeconds();
-            today = yyyy +"-"+ mm +"-"+ dd + " " + hh + ":"+ mm+ ":"+ ss ;
-            if(date.value<=today){
-                date.className = "form-control is-valid";
-            }
-            else{
-                date.className = "form-control is-invalid";
-            }
-        }
-    }
 
-  function checkNow(dateInput) {
-    var date = document.getElementsByName(dateInput)[0];
-    if (date.value!=null){
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        today = yyyy +"-"+ mm +"-"+ dd;
-        if(date.value<=today){
-            date.className = "form-control is-valid";
-        }
-        else{
-            date.className = "form-control is-invalid";
-        }
-    }
-
-      function check
-
+  function checkLessDateNow(dateInput) {
+      var date = document.getElementsByName(dateInput)[0];
+      if (date.value != null) {
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0');
+          var yyyy = today.getFullYear();
+          today = yyyy + "-" + mm + "-" + dd;
+          if (date.value <= today) {
+              date.className = "form-control is-valid";
+              return true;
+          } else {
+              date.className = "form-control is-invalid";
+              return true;
+          }
+      }
+      else
+      {
+          return false;
+      }
   }
+
+      function checkAfterDate(dateAfter, dateBefore){
+        if(checkLessDateNow(dateAfter)){
+          var newDateAfter = document.getElementsByName(dateAfter)[0];
+          var newDateBefore = document.getElementsByName(dateBefore)[0];
+          if ( newDateBefore.value!=null && newDateBefore.value!="" ){
+              if(newDateAfter.value>=newDateBefore.value){
+                  newDateAfter.className = "form-control is-valid";
+              }
+              else{
+                  newDateAfter.className = "form-control is-invalid";
+              }
+          }
+          else{
+              newDateBefore.className = "form-control is-invalid";
+          }
+        }
+
+      }
+
 
 </script>
 </body>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/bootstrap::css"></head>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<body>
+<div th:insert="blocks/header::header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col" style="margin-top: 10%;">
+    <table id="example" class="table" style="width:100%;">
+    <thead class="thead-light">
+    <tr>
+        <th>Номер дела</th>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Дата и время совершения правонарушения</th>
+        <th>Место совершения правонарушени</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="card : ${cards}">
+        <td th:text="${card.getId_card()}"></td>
+        <td th:text="${card.getFull_name()}"></td>
+        <td th:text="${card.getDate_of_birth()}"></td>
+        <td th:text="${card.getDate_of_commission()}"></td>
+        <td th:text="${card.getPlace_of_commission()}"></td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Age</th>
+        <th>Start date</th>
+    </tr>
+    </tfoot>
+    </table>
+    </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        // Setup - add a text input to each footer cell
+        $('#example tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        } );
+
+        // DataTable
+        var table = $('#example').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api().columns().every( function () {
+                    var that = this;
+
+                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );
+            }
+        });
+
+    } );
+
+    $(document).ready(function(){
+        $('table tr').on('click', function(e) {
+
+        });
+    });
+</script>
+</body>
+</html>
