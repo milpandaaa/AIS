@@ -1,15 +1,19 @@
 package com.ais.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Card {
     @Id
-    Integer id_card;
+    Long id_card;
     String last_name;
-    Integer first_name;
-    Integer patronymic;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="first_name", referencedColumnName = "id_name")
+    Names first_name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="patronymic", referencedColumnName = "id_patronymic")
+    Patronymics patronymic;
     String date_of_birth;
     Integer gender;
     Integer country;
@@ -37,20 +41,18 @@ public class Card {
     public Card() {
     }
 
-    public Integer getId_card() {
+    public Long getId_card() {
         return id_card;
     }
 
     public String getFull_name() {
-        if (first_name!=null)
-        {
-            return last_name+" "+first_name+" "+patronymic;
-        }
-        else
+        if (last_name==null||last_name.equals(""))
             return "";
+        else
+            return last_name + " " + first_name.getName() + " "+patronymic.getPatronymic();
     }
 
-    public void setId_card (Integer id_card ) {
+    public void setId_card (Long id_card ) {
         this.id_card = id_card ;
     }
 
@@ -62,19 +64,19 @@ public class Card {
         this.last_name = last_name;
     }
 
-    public Integer getFirst_name() {
+    public Names getFirst_name() {
         return first_name;
     }
 
-    public void setFirst_name(Integer first_name) {
+    public void setFirst_name(Names first_name) {
         this.first_name = first_name;
     }
 
-    public Integer getPatronymic() {
+    public Patronymics getPatronymic() {
         return patronymic;
     }
 
-    public void setPatronymic(Integer patronymic) {
+    public void setPatronymic(Patronymics patronymic) {
         this.patronymic = patronymic;
     }
 
