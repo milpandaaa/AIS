@@ -30,7 +30,7 @@
     </thead>
     <tbody>
 
-    <tr th:each="card : ${cards}">
+    <tr th:each="card : ${cards}" onclick="alert("card.getId_card()")">
         <td th:text="${card.getId_card()}"></td>
         <td th:text="${card.getFull_name()}"></td>
         <td th:text="${card.getDate_of_birth()}"></td>
