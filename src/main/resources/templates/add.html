@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
+    <title th:text="${title}"></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -14,63 +15,52 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
-
-<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
-<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">-->
-<!--        <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">-->
-
 </head>
 <body>
 <div th:insert="blocks/header::header"></div>
-<p th:text="'Hello, ' + ${title} + '!'" />
 <main role="main">
     <div class="container">
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate action="/new/" method="post">
         <!--        <h3 class="display-3">Hello, world!</h3>-->
 
         <label>Номер дела</label>
         <div class="form-row">
             <div class="form-group col-md-2">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" name="id_card_1">
             </div>
             <div class="form-group col-md-2">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" name="id_card_2">
             </div>
             <div class="form-group col-md-2">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" name="id_card_3">
             </div>
             <div class="form-group col-md-2">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" name="id_card_4">
             </div>
             <div class="form-group col-md-2">
-                <button class="btn btn-warning" style="position: flex;left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>
+                <button class="btn btn-warning" style="left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>
             </div>
             <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-dark" style="position: flex;left: 50%;"><i class="fa fa-sign-in"></i> Создать </button>
+                <button type="submit" class="btn btn-dark" style="left: 50%;"><i class="fa fa-sign-in"></i> Создать </button>
             </div>
         </div>
         <hr style="background-color:#82C0CC">
-
-        </form>
-    </div>
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-4">
 
                 <label class="control-label col-sm-2 requiredField" for="lastName" >Фамилия</label>
                 <input type="text" class="form-control" name="last_name" placeholder="Фамилия" id="lastName">
 
-                <label class="control-label col-sm-2 requiredField" for="name">Имя</label>
-                <select class="custom-select" name="first_name" id="name" required>
-                    <option selected disabled value="">Выберете имя</option>
-                    <option>...</option>
+                <label class="control-label col-sm-2" >Имя</label>
+                <select name="first_name" class="custom-select required" required>
+                    <option selected="selected" value="">Выберете имя</option>
+                    <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name}" ></option>
                 </select>
 
                 <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>
                 <select class="custom-select" name="patronymic" id="patronymic" required>
-                    <option selected disabled value="">Выберете отчество</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете отчество</option>
+                    <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}" th:value="${patronymic}"></option>
                 </select>
 
                 <label class="control-label col-sm-2 requiredField" for="date">
@@ -86,14 +76,14 @@
 
                 <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>
                 <select class="custom-select" id="sex" name="gender" required>
-                    <option selected disabled value="">Выберете пол</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете пол</option>
+                    <option th:each="gender : ${genders}" th:text="${gender.getGender()}" th:value="${gender}"></option>
                 </select>
 
                 <label for="country" style="padding-left:15px;">Место регистрации</label>
                 <select class="custom-select" id="country" name="county" required>
-                    <option selected disabled value="">Страна</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Страна</option>
+                    <option th:each="country : ${countries}" th:text="${country.getCountry()}" th:value="${country}"></option>
                 </select>
                 <input type="text" class="form-control" style="margin-top:15px;" placeholder="Номер региона" id="region" name="region">
                 <input type="text" class="form-control" style="margin-top:15px;" placeholder="Адрес" id="outdoors" name="outdoors">
@@ -126,8 +116,8 @@
                     <input class="form-control" id="date" onchange="checkAfterDate('date_of_initiation', 'date_of_commission')" name="date_of_initiation" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" required>
-                    <option selected disabled value="">Выберете ОИАЗ</option>
-                    <option>...</option>
+                    <option selected="selected" value="" >Выберете ОИАЗ</option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_initiation" style="margin-top:15px;" placeholder="Должностное лицо">
                 <hr style="background-color:#82C0CC">
@@ -143,13 +133,13 @@
                     <input class="form-control" id="date" onchange="checkAfterDate('date_of_preparing_report', 'date_of_initiation')" name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" required>
-                    <option selected disabled value="">Выберете ОИАЗ</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете ОИАЗ</option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_preparing_report" style="margin-top:15px;" placeholder="Должностное лицо">
                 <select class="custom-select" name="article" style="margin-top:15px;" required>
-                    <option selected disabled value="">Выберете номер статьи Кодекса Российской Федерации об административных правонарушениях</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете номер статьи Кодекса Российской Федерации об административных правонарушениях</option>
+                    <option th:each="article : ${articles}" th:text="${article.getDescription()}" th:value="${article}"></option>
                 </select>
                 <hr style="background-color:#82C0CC">
 
@@ -164,14 +154,14 @@
                     <input class="form-control" id="date" onchange="checkAfterDate('date_of_decision', 'date_of_initiation')" name="date_of_decision" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_of_decision"style="margin-top:15px;" required>
-                    <option selected disabled value="">Выберете ОИАЗ</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете ОИАЗ</option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_decision" style="margin-top:15px;" placeholder="Должностное лицо">
                 <input type="text" class="form-control" name="decision" style="margin-top:15px;" placeholder="Решение">
                 <select class="custom-select" name="punishment" style="margin-top:15px;" required>
-                    <option selected disabled value="">Выберете вид наказания</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете вид наказания</option>
+                    <option th:each="punishment : ${punishments}" th:text="${punishment.getName_punishment()}" th:value="${punishment}"></option>
                 </select>
                 <input type="text" class="form-control" name="sum" style="margin-top:15px;" placeholder="Штраф">
                 <hr style="background-color:#82C0CC">
@@ -215,8 +205,8 @@
                     <input class="form-control" id="date" onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_departure" required>
-                    <option selected disabled value="">Выберете ОИАЗ</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете ОИАЗ</option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
                 </select>
                 <div class="input-group" >
                     <div class="input-group-addon">
@@ -227,12 +217,14 @@
                     <input style="margin-top:15px;" class="form-control" id="date" onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival" placeholder="YYYY-MM-DD" type="text"/>
                 </div>
                 <select class="custom-select" name="office_arrival" required>
-                    <option selected disabled value="">Выберете ОИАЗ</option>
-                    <option>...</option>
+                    <option selected="selected" value="">Выберете ОИАЗ</option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
                 </select>
             </div>
         </div>
         <hr style="background-color:#82C0CC">
+        </form>
+    </div>
     </div>
 
 </main>
@@ -294,7 +286,6 @@
         }
 
       }
-
 
 </script>
 </body>

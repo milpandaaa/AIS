@@ -12,6 +12,9 @@
         padding: 3px;
         box-sizing: border-box;
     }
+    .clickable {
+        cursor: pointer;
+    }
 </style>
 <body>
 <div th:insert="blocks/header::header"></div>
@@ -29,14 +32,15 @@
     </tr>
     </thead>
     <tbody>
-
-    <tr th:each="card : ${cards}">
+    <tr th:each="card : ${cards}" class="clickable" th:onclick="'window.location.href = \'' + @{/ID/{id}(id=${card.getId_card()})} + '\''">
         <td th:text="${card.getId_card()}"></td>
         <td th:text="${card.getFull_name()}"></td>
         <td th:text="${card.getDate_of_birth()}"></td>
         <td th:text="${card.getDate_of_commission()}"></td>
         <td th:text="${card.getPlace_of_commission()}"></td>
     </tr>
+
+<!--    <a th:href="'/ID/'+${card.getId_card()}"></a>-->
 
     </tbody>
     <tfoot>
@@ -82,11 +86,8 @@
 
     } );
 
-    $(document).ready(function(){
-        $('table tr').on('click', function(e) {
 
-        });
-    });
+
 </script>
 </body>
 </html>

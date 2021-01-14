@@ -1,7 +1,6 @@
 package com.ais.project.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Card {
@@ -15,24 +14,39 @@ public class Card {
     @JoinColumn(name="patronymic", referencedColumnName = "id_patronymic")
     Patronymics patronymic;
     String date_of_birth;
-    Integer gender;
-    Integer country;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="gender", referencedColumnName = "id_gender")
+    Gender gender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="country", referencedColumnName = "id_country")
+    Countries country;
     Integer region;
     String outdoors ;
+    String time_of_commission;
     String date_of_commission;
     String place_of_commission;
     String date_of_initiation;
-    Integer office_of_initiation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="office_of_initiation", referencedColumnName = "id_office")
+    Offices office_of_initiation;
     String name_of_initiation;
     String date_of_preparing_report;
-    Integer office_of_preparing_report;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="office_of_preparing_report", referencedColumnName = "id_office")
+    Offices office_of_preparing_report;
     String name_of_preparing_report;
-    Integer id_article;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_article", referencedColumnName = "id_article")
+    Article id_article;
     String date_of_decision;
     String decision;
-    Integer office_of_decision;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="office_of_decision", referencedColumnName = "id_office")
+    Offices office_of_decision;
     String name_of_decision;
-    Integer punishment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="punishment", referencedColumnName = "id_punishment")
+    Punishment punishment;
     Integer sum;
     String date_of_entry_into_force;
     String date_sentence_enforcement;
@@ -88,21 +102,6 @@ public class Card {
         this.date_of_birth = date_of_birth;
     }
 
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public Integer getCountry() {
-        return country;
-    }
-
-    public void setCountry(Integer country) {
-        this.country = country;
-    }
 
     public Integer getRegion() {
         return region;
@@ -144,13 +143,7 @@ public class Card {
         this.date_of_initiation = date_of_initiation;
     }
 
-    public Integer getOffice_of_initiation() {
-        return office_of_initiation;
-    }
 
-    public void setOffice_of_initiation(Integer office_of_initiation) {
-        this.office_of_initiation = office_of_initiation;
-    }
 
     public String getName_of_initiation() {
         return name_of_initiation;
@@ -168,13 +161,7 @@ public class Card {
         this.date_of_preparing_report = date_of_preparing_report;
     }
 
-    public Integer getOffice_of_preparing_report() {
-        return office_of_preparing_report;
-    }
 
-    public void setOffice_of_preparing_report(Integer office_of_preparing_report) {
-        this.office_of_preparing_report = office_of_preparing_report;
-    }
 
     public String getName_of_preparing_report() {
         return name_of_preparing_report;
@@ -184,13 +171,6 @@ public class Card {
         this.name_of_preparing_report = name_of_preparing_report;
     }
 
-    public Integer getId_article() {
-        return id_article;
-    }
-
-    public void setId_article(Integer id_article) {
-        this.id_article = id_article;
-    }
 
     public String getDate_of_decision() {
         return date_of_decision;
@@ -208,28 +188,12 @@ public class Card {
         this.decision = decision;
     }
 
-    public Integer getOffice_of_decision() {
-        return office_of_decision;
-    }
-
-    public void setOffice_of_decision(Integer office_of_decision) {
-        this.office_of_decision = office_of_decision;
-    }
-
     public String getName_of_decision() {
         return name_of_decision;
     }
 
     public void setName_of_decision(String name_of_decision) {
         this.name_of_decision = name_of_decision;
-    }
-
-    public Integer getPunishment() {
-        return punishment;
-    }
-
-    public void setPunishment(Integer punishment) {
-        this.punishment = punishment;
     }
 
     public Integer getSum() {
@@ -261,6 +225,52 @@ public class Card {
     }
 
     public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getTime_of_commission() {
+        return time_of_commission;
+    }
+
+    public void setTime_of_commission(String time_of_commission) {
+        this.time_of_commission = time_of_commission;
+    }
+
+    public Card(Long id_card, String last_name, Names first_name, Patronymics patronymic, String date_of_birth,
+                Gender gender, Countries country, Integer region, String outdoors, String time_of_commission,
+                String date_of_commission, String place_of_commission, String date_of_initiation,
+                Offices office_of_initiation, String name_of_initiation, String date_of_preparing_report,
+                Offices office_of_preparing_report, String name_of_preparing_report, Article id_article,
+                String date_of_decision, String decision, Offices office_of_decision, String name_of_decision,
+                Punishment punishment, Integer sum, String date_of_entry_into_force, String date_sentence_enforcement,
+                Integer amount) {
+        this.id_card = id_card;
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.patronymic = patronymic;
+        this.date_of_birth = date_of_birth;
+        this.gender = gender;
+        this.country = country;
+        this.region = region;
+        this.outdoors = outdoors;
+        this.time_of_commission = time_of_commission;
+        this.date_of_commission = date_of_commission;
+        this.place_of_commission = place_of_commission;
+        this.date_of_initiation = date_of_initiation;
+        this.office_of_initiation = office_of_initiation;
+        this.name_of_initiation = name_of_initiation;
+        this.date_of_preparing_report = date_of_preparing_report;
+        this.office_of_preparing_report = office_of_preparing_report;
+        this.name_of_preparing_report = name_of_preparing_report;
+        this.id_article = id_article;
+        this.date_of_decision = date_of_decision;
+        this.decision = decision;
+        this.office_of_decision = office_of_decision;
+        this.name_of_decision = name_of_decision;
+        this.punishment = punishment;
+        this.sum = sum;
+        this.date_of_entry_into_force = date_of_entry_into_force;
+        this.date_sentence_enforcement = date_sentence_enforcement;
         this.amount = amount;
     }
 }

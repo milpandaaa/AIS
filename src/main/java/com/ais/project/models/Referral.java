@@ -1,22 +1,24 @@
 package com.ais.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Referral {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
-    Integer card;
-    String dateDeparture;
-    Integer officeDeparture;
-    String dateArrival;
-    Integer officeArrival;
+    Long card;
+    String date_departure;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="office_departure", referencedColumnName = "id_office")
+    Offices office_departure;
+    String date_arrival;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="office_arrival", referencedColumnName = "id_office")
+    Offices office_arrival;
 
     public Referral() {
+
     }
 
     public Integer getId() {
@@ -27,43 +29,43 @@ public class Referral {
         this.id = id;
     }
 
-    public Integer getCard() {
+    public Long getCard() {
         return card;
     }
 
-    public void setCard(Integer card) {
+    public void setCard(Long card) {
         this.card = card;
     }
 
-    public String getDateDeparture() {
-        return dateDeparture;
+    public String getDate_departure() {
+        return date_departure;
     }
 
-    public void setDateDeparture(String dateDeparture) {
-        this.dateDeparture = dateDeparture;
+    public void setDate_departure(String date_departure) {
+        this.date_departure = date_departure;
     }
 
-    public Integer getOfficeDeparture() {
-        return officeDeparture;
+    public Offices getOffice_departure() {
+        return office_departure;
     }
 
-    public void setOfficeDeparture(Integer officeDeparture) {
-        this.officeDeparture = officeDeparture;
+    public void setOffice_departure(Offices office_departure) {
+        this.office_departure = office_departure;
     }
 
-    public String getDateArrival() {
-        return dateArrival;
+    public String getDate_arrival() {
+        return date_arrival;
     }
 
-    public void setDateArrival(String dateArrival) {
-        this.dateArrival = dateArrival;
+    public void setDate_arrival(String date_arrival) {
+        this.date_arrival = date_arrival;
     }
 
-    public Integer getOfficeArrival() {
-        return officeArrival;
-    }
-
-    public void setOfficeArrival(Integer officeArrival) {
-        this.officeArrival = officeArrival;
+    public Referral(Long card, String date_departure, Offices office_departure, String date_arrival, Offices office_arrival) {
+        this.card = card;
+        this.date_departure = date_departure;
+        this.office_departure = office_departure;
+        this.date_arrival = date_arrival;
+        this.office_arrival = office_arrival;
     }
 }
