@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Controller
 class MainController{
 
@@ -104,5 +108,45 @@ class MainController{
         return "all";
     }
 
+    @GetMapping("/newName/")
+    public String newName(Model model) {//всегда принимает модель
+        List<Names> names = (List<Names>) nameRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+        Map<Character, List<String>> collect = names.stream()
+                .map(Names::getName)
+                .collect(Collectors.groupingBy(s -> s.charAt(0)));
+        model.addAttribute("nameClass", "Новое имя");
+        model.addAttribute("action", "newName");
+        model.addAttribute("names", collect);
+
+        model.addAttribute("title", "Добавление имени");//передаем параметры
+        return "addNamePatronymic";
+    }
+
+    @PostMapping("/newName/")
+    public String addNewName(Model model, @RequestParam String name ){
+        Names newName = new Names(name);
+        nameRepository.save(newName);
+        return "redirect:/newName/";
+    }
+
+    @GetMapping("/newPatronymic/")
+    public String newPatronymic(Model model) {
+        List<Patronymics> patronymics = (List<Patronymics>) patronymicRepository.findAll(Sort.by(Sort.Direction.ASC, "patronymic"));
+        Map<Character, List<String>> collect = patronymics.stream()
+                .map(Patronymics::getPatronymic)
+                .collect(Collectors.groupingBy(s -> s.charAt(0)));
+        model.addAttribute("names", collect);
+        model.addAttribute("nameClass", "Новое отчество");
+        model.addAttribute("action", "newPatronymic");
+        model.addAttribute("title", "Добавление отчества");//передаем параметры
+        return "addNamePatronymic";
+    }
+
+    @PostMapping("/newPatronymic/")
+    public String addNewPatronymic(Model model, @RequestParam String name){
+        Patronymics newPatronymic = new Patronymics(name);
+        patronymicRepository.save(newPatronymic);
+        return "redirect:/newPatronymic/";
+    }
 
 }

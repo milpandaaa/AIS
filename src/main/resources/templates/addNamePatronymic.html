@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/bootstrap::css"></head>
+
+
+<style>
+
+    .abc_row {
+        /*   outline: 2px dashed green; */
+    }
+
+    .abc_col {
+        /*   outline: 2px solid red; */
+    }
+
+    .abc_author {
+        text-align: center;
+    }
+    .abc_main-letter {
+        /*background: url(https://www.du9.org/wp-content/themes/du9/img/decouverte/bg-letter.jpg) center 78px no-repeat;*/
+        font-family: 'League Gothic Regular', sans-serif;
+        font-size: 100px;
+        line-height: 85px;
+        /*outline: 2px solid black;*/
+        margin-top: 2px;
+        margin-bottom: 2px;
+        text-align: center;
+        /*box-shadow: inset 0 0px 0 white, inset 0 -1px 0 black*/
+        color: black;
+    }
+
+
+    /* GRID */
+
+    .wrapper {
+        max-width: 1180px;
+        padding: 0 15px;
+        margin: 0 auto;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -8px;
+    }
+
+    .row--inner {
+        margin: 0 0px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .col {
+
+        box-sizing: border-box;
+
+        width: calc(8.33% - 8px);
+        margin: 4px 4px 4px 4px;
+
+    }
+
+    .col-lg-1 {
+        width: calc(8.33333333333333% - 8px);
+    }
+
+    .col-lg-2 {
+        width: calc(16.6666666666667% - 8px);
+    }
+
+    .col-lg-3 {
+        width: calc(25% - 8px);
+    }
+
+    .col-lg-4 {
+        width: calc(33.3333333333333% - 8px);
+    }
+
+    .col-lg-5 {
+        width: calc(41.6666666666667% - 8px);
+    }
+
+
+    .col-lg-12 {
+        width: calc(100% - 8px);
+    }
+
+    @media screen and (max-width: 1200px) {
+
+        .col-md-12 {
+            width: calc(100% - 8px);
+        }
+
+        @media screen and (max-width: 1020px) {
+
+            .col-xs-12 {
+                width: calc(100% - 8px);
+            }
+
+
+        }
+    }
+</style>
+<body>
+<div th:insert="blocks/header::header"></div>
+
+<main role="main">
+    <div class="container">
+
+        <div class="col col-lg-12 col-md-12 col-xs-12 article-col">
+
+            <form class="needs-validation" novalidate th:action="@{/{path}/(path=${action})}" method="post">
+
+                <label th:text="${nameClass}"></label>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-dark" style="left: 50%;"><i class="fa fa-sign-in"></i> Добавить</button>
+                </div>
+            </form>
+        </div>
+
+            <article >
+                <div th:each="name : ${names}">
+                <div th:switch="${name.getKey()}">
+                    <div th:case="'А'">
+                <p class="abc_main-letter" id="A">A</p>
+                    <div th:each="element : ${name.getValue()}">
+                        <p class="abc_author letter A" th:text="${element}"></p>
+                    </div>
+                </div>
+
+
+                    <div th:case="'Б'">
+                <p class="abc_main-letter" id="B">Б</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter B" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+
+                    <div th:case="'В'">
+                <p class="abc_main-letter" id="V">B</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter V" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Г'">
+                <p class="abc_main-letter" id="G">Г</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter G" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Д'">
+                <p class="abc_main-letter" id="D">Д</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter D" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'E'">
+                <p class="abc_main-letter" id="Ye">E</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Ye" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Ж'">
+                <p class="abc_main-letter" id="Zh">Ж</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Zh" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+
+                    <div th:case="'З'">
+                <p class="abc_main-letter" id="Z">З</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Z" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+
+                    <div th:case="'И'">
+                <p class="abc_main-letter" id="I">И</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter I" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Й'">
+                <p class="abc_main-letter" id="J">Й</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter J" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Л'">
+                <p class="abc_main-letter" id="K">К</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter K" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Л'">
+                <p class="abc_main-letter" id="L">Л</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter L" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                   <div th:case="'М'">
+                <p class="abc_main-letter" id="M">М</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter M" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'Н'">
+                <p class="abc_main-letter" id="N">Н</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter N" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'О'">
+                <p class="abc_main-letter" id="O">О</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter O" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'П'">
+                <p class="abc_main-letter" id="P">П</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter P" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'Р'">
+                <p class="abc_main-letter" id="R">Р</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter R" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'С'">
+                <p class="abc_main-letter" id="S">С</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter S" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'Т'">
+                <p class="abc_main-letter" id="T">Т</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter T" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                  <div th:case="'У'">
+                <p class="abc_main-letter" id="U">У</p>
+                      <div th:each="element : ${name.getValue()}">
+                          <p class="abc_author letter U" th:text="${element}"></p>
+                      </div>
+                  </div>
+
+                   <div th:case="'Ф'">
+                <p class="abc_main-letter" id="F">Ф</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter F" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'Х'">
+                <p class="abc_main-letter" id="H">Х</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter H" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                   <div th:case="'Ц'">
+                <p class="abc_main-letter" id="Ts">Ц</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter Ts" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                    <div th:case="'Ч'">
+                <p class="abc_main-letter" id="Ch">Ч</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Ch" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Ш'">
+                <p class="abc_main-letter" id="Sh">Ш</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Sh" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                    <div th:case="'Щ'">
+                <p class="abc_main-letter" id="Sc">Щ</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Sc" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                   <div th:case="'Э'">
+                <p class="abc_main-letter" id="E">Э</p>
+                       <div th:each="element : ${name.getValue()}">
+                           <p class="abc_author letter E" th:text="${element}"></p>
+                       </div>
+                   </div>
+
+                  <div th:case="'Ю'">
+                <p class="abc_main-letter" id="Yu">Ю</p>
+                      <div th:each="element : ${name.getValue()}">
+                          <p class="abc_author letter Yu" th:text="${element}"></p>
+                      </div>
+                  </div>
+
+                    <div th:case="'Я'">
+                <p class="abc_main-letter" id="Ya">Я</p>
+                        <div th:each="element : ${name.getValue()}">
+                            <p class="abc_author letter Ya" th:text="${element}"></p>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+
+
+                <div class="letter-A">
+                </div>
+                <div class="letter-B">
+                </div>
+                <div class="letter-V">
+                </div>
+                <div class="letter-G">
+                </div>
+                <div class="letter-D">
+                </div>
+                <div class="letter-Ye">
+                </div>
+                <div class="letter-Zh">
+                </div>
+                <div class="letter-Z">
+                </div>
+                <div class="letter-I">
+                </div>
+                <div class="letter-J">
+                </div>
+                <div class="letter-K">
+                </div>
+                <div class="letter-L">
+                </div>
+                <div class="letter-M">
+                </div>
+                <div class="letter-N">
+                </div>
+                <div class="letter-O">
+                </div>
+                <div class="letter-P">
+                </div>
+                <div class="letter-R">
+                </div>
+                <div class="letter-S">
+                </div>
+                <div class="letter-T">
+                </div>
+                <div class="letter-U">
+                </div>
+                <div class="letter-F">
+                </div>
+                <div class="letter-H">
+                </div>
+                <div class="letter-Ts">
+                </div>
+                <div class="letter-Ch">
+                </div>
+                <div class="letter-Sh">
+                </div>
+                <div class="letter-Sc">
+                </div>
+                <div class="letter-E">
+                </div>
+                <div class="letter-Yu">
+                </div>
+                <div class="letter-Ya">
+                </div>
+
+                <div class="row row--inner abc_row">
+                    <div class="col col-lg-2 col-md-6 col-sm-6 col-xs-12 abc_col abc_col-1">
+                    </div>
+
+                    <div class="col col-lg-2 col-md-6 col-sm-6 col-xs-12 abc_col abc_col-2">
+                    </div>
+
+                    <div class="col col-lg-2 col-md-6 col-sm-6 col-xs-12 abc_col abc_col-3">
+                    </div>
+
+                    <div class="col col-lg-2 col-md-6 col-sm-6 col-xs-12 abc_col abc_col-4">
+                    </div>
+                </div>
+
+
+            </article>
+</div>
+</main>
+         <!--main-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+,<script>
+    $('#A').appendTo( $('.letter-A') );
+    $('.A').appendTo( $('.letter-A') );
+
+    $('#B').appendTo( $('.letter-B') );
+    $('.B').appendTo( $('.letter-B') );
+
+    $('#V').appendTo( $('.letter-V') );
+    $('.V').appendTo( $('.letter-V') );
+
+    $('#G').appendTo( $('.letter-G') );
+    $('.G').appendTo( $('.letter-G') );
+
+    $('#D').appendTo( $('.letter-D') );
+    $('.D').appendTo( $('.letter-D') );
+
+    $('#Ye').appendTo( $('.letter-Ye') );
+    $('.Ye').appendTo( $('.letter-Ye') );
+
+    $('#Zh').appendTo( $('.letter-Zh') );
+    $('.Zh').appendTo( $('.letter-Zh') );
+
+    $('#Z').appendTo( $('.letter-Z') );
+    $('.Z').appendTo( $('.letter-Z') );
+
+    $('#I').appendTo( $('.letter-I') );
+    $('.I').appendTo( $('.letter-I') );
+
+    $('#J').appendTo( $('.letter-J') );
+    $('.J').appendTo( $('.letter-J') );
+
+    $('#K').appendTo( $('.letter-K') );
+    $('.K').appendTo( $('.letter-K') );
+
+    $('#L').appendTo( $('.letter-L') );
+    $('.L').appendTo( $('.letter-L') );
+
+    $('#M').appendTo( $('.letter-M') );
+    $('.M').appendTo( $('.letter-M') );
+
+    $('#N').appendTo( $('.letter-N') );
+    $('.N').appendTo( $('.letter-N') );
+
+    $('#O').appendTo( $('.letter-O') );
+    $('.O').appendTo( $('.letter-O') );
+
+    $('#P').appendTo( $('.letter-P') );
+    $('.P').appendTo( $('.letter-P') );
+
+    $('#R').appendTo( $('.letter-R') );
+    $('.R').appendTo( $('.letter-R') );
+
+    $('#S').appendTo( $('.letter-S') );
+    $('.S').appendTo( $('.letter-S') );
+
+    $('#T').appendTo( $('.letter-T') );
+    $('.T').appendTo( $('.letter-T') );
+
+    $('#U').appendTo( $('.letter-U') );
+    $('.U').appendTo( $('.letter-U') );
+
+    $('#F').appendTo( $('.letter-F') );
+    $('.F').appendTo( $('.letter-F') );
+
+    $('#H').appendTo( $('.letter-H') );
+    $('.H').appendTo( $('.letter-H') );
+
+    $('#Ts').appendTo( $('.letter-Ts') );
+    $('.Ts').appendTo( $('.letter-Ts') );
+
+    $('#Ch').appendTo( $('.letter-Ch') );
+    $('.Ch').appendTo( $('.letter-Ch') );
+
+    $('#Sh').appendTo( $('.letter-Sh') );
+    $('.Sh').appendTo( $('.letter-Sh') );
+
+    $('#Sc').appendTo( $('.letter-Sc') );
+    $('.Sc').appendTo( $('.letter-Sc') );
+
+    $('#E').appendTo( $('.letter-E') );
+    $('.E').appendTo( $('.letter-E') );
+
+    $('#Yu').appendTo( $('.letter-Yu') );
+    $('.Yu').appendTo( $('.letter-Yu') );
+
+    $('#Ya').appendTo( $('.letter-Ya') );
+    $('.Ya').appendTo( $('.letter-Ya') );
+
+
+    var count_A = $('.A').length;
+    console.log("столбец A", count_A);
+
+    var count_B = $('.B').length;
+    console.log("столбец Б", count_B);
+
+    var count_V = $('.V').length;
+    console.log("столбец В", count_V);
+
+    var count_G = $('.G').length;
+    console.log("столбец Г", count_G);
+
+    $('.letter-A').appendTo( $('.abc_col-1') );
+    $('.letter-B').appendTo( $('.abc_col-2') );
+    $('.letter-V').appendTo( $('.abc_col-3') );
+    $('.letter-G').appendTo( $('.abc_col-4') );
+
+    var count_min = Math.min(count_A, count_B, count_V, count_G);
+    console.log("минимальное значение начальных столбцов для E", count_min);
+
+    if (count_min == count_A ) {
+        $('.letter-D').appendTo( $('.abc_col-1') );
+    }
+
+    if (count_min == count_B) {
+        $('.letter-D').appendTo( $('.abc_col-2') );
+    }
+
+    if (count_min == count_V) {
+        $('.letter-D').appendTo( $('.abc_col-3') );
+    }
+
+    if (count_min == count_G) {
+        $('.letter-D').appendTo( $('.abc_col-4') );
+    }
+
+    // проверка на одинаковость начальных рядов, чтобы всегда шел в первый
+
+    if (count_min == count_A && count_min == count_B ) {
+        $('.letter-D').appendTo( $('.abc_col-1') );
+    }
+
+    if (count_min == count_A && count_min == count_V ) {
+        $('.letter-D').appendTo( $('.abc_col-1') );
+    }
+
+    if (count_min == count_A && count_min == count_G ) {
+        $('.letter-D').appendTo( $('.abc_col-1') );
+    }
+
+    // F
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для F", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Ye').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Ye').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Ye').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Ye').appendTo( $('.abc_col-4') );
+    }
+
+    // G
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для G", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Zh').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Zh').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Zh').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Zh').appendTo( $('.abc_col-4') );
+    }
+
+    // H
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для H", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Z').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Z').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Z').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Z').appendTo( $('.abc_col-4') );
+    }
+
+    // I
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для I", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-I').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-I').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-I').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-I').appendTo( $('.abc_col-4') );
+    }
+
+
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для H", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-J').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-J').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-J').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-J').appendTo( $('.abc_col-4') );
+    }
+
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для K", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-K').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-K').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-K').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-K').appendTo( $('.abc_col-4') );
+    }
+
+
+    // L
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для L", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-L').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-L').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-L').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-L').appendTo( $('.abc_col-4') );
+    }
+
+    // M
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    console.log("4 колонка", full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    console.log("4 колонка", full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    console.log("4 колонка", full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    console.log("4 колонка", full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для M", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-M').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-M').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-M').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-M').appendTo( $('.abc_col-4') );
+    }
+
+    // N
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для N", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-N').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-N').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-N').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-N').appendTo( $('.abc_col-4') );
+    }
+
+    // O
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для O", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-O').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-O').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-O').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-O').appendTo( $('.abc_col-4') );
+    }
+
+    // P
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для P", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-P').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-P').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-P').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-P').appendTo( $('.abc_col-4') );
+    }
+
+    // R
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для R", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-R').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-R').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-R').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-R').appendTo( $('.abc_col-4') );
+    }
+
+    // S
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для S", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-S').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-S').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-S').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-S').appendTo( $('.abc_col-4') );
+    }
+
+    // T
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для T", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-T').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-T').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-T').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-T').appendTo( $('.abc_col-4') );
+    }
+
+
+    // V
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для V", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-U').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-U').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-U').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-U').appendTo( $('.abc_col-4') );
+    }
+
+    // W
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для W", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-F').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-F').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-F').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-F').appendTo( $('.abc_col-4') );
+    }
+
+    // X
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для X", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-H').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-H').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-H').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-H').appendTo( $('.abc_col-4') );
+    }
+
+    ////-------------------
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для V", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Ts').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Ts').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Ts').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Ts').appendTo( $('.abc_col-4') );
+    }
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для V", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Ch').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Ch').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Ch').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Ch').appendTo( $('.abc_col-4') );
+    }
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для V", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Sh').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Sh').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Sh').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Sh').appendTo( $('.abc_col-4') );
+    }
+
+    // X
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для X", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Sc').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Sc').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Sc').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Sc').appendTo( $('.abc_col-4') );
+    }
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для V", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-E').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-E').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-E').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-E').appendTo( $('.abc_col-4') );
+    }
+
+
+    // Y
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для Y", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Yu').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Yu').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Yu').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Yu').appendTo( $('.abc_col-4') );
+    }
+
+
+    // Z
+
+    var full_height1 = 0;
+    $(".abc_col-1 div").each(function(){
+        full_height1+=$(this).height();
+    });
+    // alert(full_height1);
+
+    var full_height2 = 0;
+    $(".abc_col-2 div").each(function(){
+        full_height2+=$(this).height();
+    });
+    // alert(full_height2);
+
+    var full_height3 = 0;
+    $(".abc_col-3 div").each(function(){
+        full_height3+=$(this).height();
+    });
+    // alert(full_height3);
+
+    var full_height4 = 0;
+    $(".abc_col-4 div").each(function(){
+        full_height4+=$(this).height();
+    });
+    // alert(full_height4);
+
+    var min_div = Math.min(full_height1, full_height2, full_height3, full_height4);
+    console.log("минимальная высота дивов для Z", min_div);
+
+
+    if (min_div == full_height1) {
+        $('.letter-Ya').appendTo( $('.abc_col-1') );
+    }
+
+    if (min_div == full_height2) {
+        $('.letter-Ya').appendTo( $('.abc_col-2') );
+    }
+
+    if (min_div == full_height3) {
+        $('.letter-Ya').appendTo( $('.abc_col-3') );
+    }
+
+    if (min_div == full_height4) {
+        $('.letter-Ya').appendTo( $('.abc_col-4') );
+    }
+
+    checkWidth();
+    // Bind event listener
+    $(window).resize(checkWidth);
+</script>
+</body>
+</html>

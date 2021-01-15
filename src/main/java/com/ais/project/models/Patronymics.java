@@ -6,6 +6,7 @@ import java.util.Collection;
 @Entity
 public class Patronymics {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id_patronymic;
     private String patronymic;
     @OneToMany(fetch = FetchType.EAGER)
@@ -26,5 +27,12 @@ public class Patronymics {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+
+    public Patronymics(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public Patronymics() {
     }
 }

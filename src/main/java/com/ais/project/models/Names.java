@@ -6,11 +6,16 @@ import java.util.Collection;
 @Entity
 public class Names {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id_name;
     private String name;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="first_name")
     private Collection<Card> cards;
+
+    public Names() {
+
+    }
 
     public Integer getId_name() {
         return id_name;
@@ -25,6 +30,10 @@ public class Names {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Names(String name) {
         this.name = name;
     }
 }
