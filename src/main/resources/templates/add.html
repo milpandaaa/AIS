@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
     <title th:text="${title}"></title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -15,13 +18,18 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
 </head>
 <body>
 <div th:insert="blocks/header::header"></div>
 <main role="main">
     <div class="container">
-        <form class="needs-validation" novalidate action="/new/" method="post">
-        <!--        <h3 class="display-3">Hello, world!</h3>-->
+        <form class="needs-validation" novalidate action="/new" method="post">
 
         <label>Номер дела</label>
         <div class="form-row">
@@ -38,10 +46,9 @@
                 <input type="number" class="form-control" name="id_card_4">
             </div>
             <div class="form-group col-md-2">
-                <button class="btn btn-warning" style="left: 50%;"><i class="fa fa-sign-in"></i> Нарисовать </button>
             </div>
             <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-dark" style="left: 50%;"><i class="fa fa-sign-in"></i> Создать </button>
+                <button type="submit" class="btn btn-dark"><i class="fa fa-sign-in"></i> Создать </button>
             </div>
         </div>
         <hr style="background-color:#82C0CC">
@@ -51,16 +58,17 @@
                 <label class="control-label col-sm-2 requiredField" for="lastName" >Фамилия</label>
                 <input type="text" class="form-control" name="last_name" placeholder="Фамилия" id="lastName">
 
+
                 <label class="control-label col-sm-2" >Имя</label>
-                <select name="first_name" class="custom-select required" required>
+                <select name="first_name" class="custom-select required" required >
                     <option selected="selected" value="">Выберете имя</option>
-                    <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name}" ></option>
+                    <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name.getId_name()}" ></option>
                 </select>
 
                 <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>
                 <select class="custom-select" name="patronymic" id="patronymic" required>
                     <option selected="selected" value="">Выберете отчество</option>
-                    <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}" th:value="${patronymic}"></option>
+                    <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}" th:value="${patronymic.getId_patronymic()}"></option>
                 </select>
 
                 <label class="control-label col-sm-2 requiredField" for="date">
@@ -77,13 +85,13 @@
                 <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>
                 <select class="custom-select" id="sex" name="gender" required>
                     <option selected="selected" value="">Выберете пол</option>
-                    <option th:each="gender : ${genders}" th:text="${gender.getGender()}" th:value="${gender}"></option>
+                    <option th:each="gender : ${genders}" th:text="${gender.getGender()}" th:value="${gender.getId_gender()}"></option>
                 </select>
 
                 <label for="country" style="padding-left:15px;">Место регистрации</label>
                 <select class="custom-select" id="country" name="county" required>
-                    <option selected="selected" value="">Страна</option>
-                    <option th:each="country : ${countries}" th:text="${country.getCountry()}" th:value="${country}"></option>
+                    <option selected="selected" value="">Выберете страну</option>
+                    <option th:each="country : ${countries}" th:text="${country.getCountry()}" th:value="${country.getId_country()}"></option>
                 </select>
                 <input type="text" class="form-control" style="margin-top:15px;" placeholder="Номер региона" id="region" name="region">
                 <input type="text" class="form-control" style="margin-top:15px;" placeholder="Адрес" id="outdoors" name="outdoors">
@@ -117,7 +125,7 @@
                 </div>
                 <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" required>
                     <option selected="selected" value="" >Выберете ОИАЗ</option>
-                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_initiation" style="margin-top:15px;" placeholder="Должностное лицо">
                 <hr style="background-color:#82C0CC">
@@ -134,12 +142,12 @@
                 </div>
                 <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" required>
                     <option selected="selected" value="">Выберете ОИАЗ</option>
-                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_preparing_report" style="margin-top:15px;" placeholder="Должностное лицо">
                 <select class="custom-select" name="article" style="margin-top:15px;" required>
                     <option selected="selected" value="">Выберете номер статьи Кодекса Российской Федерации об административных правонарушениях</option>
-                    <option th:each="article : ${articles}" th:text="${article.getDescription()}" th:value="${article}"></option>
+                    <option th:each="article : ${articles}" th:text="${article.getDescription()}" th:value="${article.getId_article()}"></option>
                 </select>
                 <hr style="background-color:#82C0CC">
 
@@ -155,13 +163,13 @@
                 </div>
                 <select class="custom-select" name="office_of_decision"style="margin-top:15px;" required>
                     <option selected="selected" value="">Выберете ОИАЗ</option>
-                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                 </select>
                 <input type="text" class="form-control" name="name_of_decision" style="margin-top:15px;" placeholder="Должностное лицо">
                 <input type="text" class="form-control" name="decision" style="margin-top:15px;" placeholder="Решение">
                 <select class="custom-select" name="punishment" style="margin-top:15px;" required>
                     <option selected="selected" value="">Выберете вид наказания</option>
-                    <option th:each="punishment : ${punishments}" th:text="${punishment.getName_punishment()}" th:value="${punishment}"></option>
+                    <option th:each="punishment : ${punishments}" th:text="${punishment.getName_punishment()}" th:value="${punishment.getId_punishment()}"></option>
                 </select>
                 <input type="text" class="form-control" name="sum" style="margin-top:15px;" placeholder="Штраф">
                 <hr style="background-color:#82C0CC">
@@ -206,7 +214,7 @@
                 </div>
                 <select class="custom-select" name="office_departure" required>
                     <option selected="selected" value="">Выберете ОИАЗ</option>
-                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                 </select>
                 <div class="input-group" >
                     <div class="input-group-addon">
@@ -218,7 +226,7 @@
                 </div>
                 <select class="custom-select" name="office_arrival" required>
                     <option selected="selected" value="">Выберете ОИАЗ</option>
-                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office}"></option>
+                    <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                 </select>
             </div>
         </div>
@@ -286,6 +294,8 @@
         }
 
       }
+
+    $('select').select2();
 
 </script>
 </body>

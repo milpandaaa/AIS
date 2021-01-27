@@ -1,4 +1,293 @@
-{% extends 'main.html' %}
-{% block body %}
-<p th:text="'Hello, ' + ${title} + '!'" />
-{% endblock %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="utf-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+
+</head>
+<body>
+<div th:insert="blocks/header::header"></div>
+<main role="main">
+    <div class="container">
+        <div th:each="el:${card}">
+        <form class="needs-validation" method="post">
+
+            <label></label>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <h5>Номер дела</h5>
+                </div>
+                <div class="form-group col-md-2">
+                    <p th:text="${el.getId_card()}"></p>
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-dark" ><i class="fa fa-sign-in"></i> Сохранить </button>
+                </div>
+            </div>
+            <hr style="background-color:#82C0CC">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <label class="control-label col-sm-2 requiredField" for="lastName" >Фамилия</label>
+                    <input type="text" class="form-control" name="last_name" th:value="${el.getLast_name()}" placeholder="Фамилия" id="lastName">
+
+                    <label class="control-label col-sm-2" >Имя</label>
+                    <select name="first_name" class="custom-select required" >
+                        <option selected="selected" th:value="${el.getFirst_name()?.getId_name()}" th:text="${el.getFirst_name().getName()} ? ${el.getFirst_name().getName()} : 'Выберете имя'"></option>
+                        <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name.getId_name()}" ></option>
+                    </select>
+
+                    <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>
+                    <select class="custom-select" name="patronymic" id="patronymic" >
+                        <option selected="selected" th:value="${el.getPatronymic()?.getId_patronymic()}" th:text="${el.getPatronymic().getPatronymic()} ? ${el.getPatronymic().getPatronymic()} : 'Выберете отчество'"></option>
+                        <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}" th:value="${patronymic.getId_patronymic()}"></option>
+                    </select>
+
+                    <label class="control-label col-sm-2 requiredField" for="date">
+                        Дата рождения
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input onchange="checkLessDateNow('date_of_birth')" class="form-control" id="date" name="date_of_birth" th:value="${el.getDate_of_birth()}" placeholder="YYYY-MM-DD" type="text"/>
+                    </div>
+
+                    <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>
+                    <select class="custom-select" id="sex" name="gender" >
+                        <option selected="selected" th:value="${el.getGender()?.getId_gender()}" th:text="${el.getGender()?.getGender()} ? ${el.getGender()?.getGender()} : 'Выберете пол'"></option>
+                        <option th:each="gender : ${genders}" th:text="${gender.getGender()}" th:value="${gender.getId_gender()}"></option>
+                    </select>
+
+                    <label for="country" style="padding-left:15px;">Место регистрации</label>
+                    <select class="custom-select" id="country" name="country">
+                        <option selected="selected" th:value="${el.getCountry()?.getId_country()}" th:text="${el.getCountry()?.getCountry()} ? ${el.getCountry().getCountry()} : 'Выберете страну'"></option>
+                        <option th:each="country : ${countries}" th:text="${country.getCountry()}" th:value="${country.getId_country()}"></option>
+                    </select>
+                    <input type="text" class="form-control" style="margin-top:15px;" placeholder="Номер региона" id="region" name="region" th:value="${el.getRegion()}">
+                    <input type="text" class="form-control" style="margin-top:15px;" placeholder="Адрес" id="outdoors" name="outdoors" th:value="${el.getOutdoors()}">
+                </div>
+
+                <div class="col-md-4">
+                    <label >
+                        Совершение правонарушений
+                    </label>
+                    <input type="text" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" name="time_of_commission" data-target="#datetimepicker3" placeholder="HH:MM:SS" th:value="${el.getTime_of_commission()}"/>
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkLessDateNow('date_of_commission')" name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;" th:value="${el.getDate_of_commission()}"/>
+                    </div>
+                    <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" placeholder="Место правонарушения" th:value="${el.getPlace_of_commission()}">
+                    <hr style="background-color:#82C0CC">
+
+                    <label>
+                        Возбуждение дела
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_of_initiation', 'date_of_commission')" name="date_of_initiation" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_of_initiation()}"/>
+                    </div>
+                    <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" >
+                        <option selected="selected" th:value="${el.getOffice_of_initiation()?.getId_office()}" th:text="${el.getOffice_of_initiation()} ? ${el.getOffice_of_initiation().getDepartment()}+' '+${el.getOffice_of_initiation().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
+                    </select>
+                    <input type="text" class="form-control" name="name_of_initiation" style="margin-top:15px;" placeholder="Должностное лицо" th:value="${el.getName_of_initiation()}">
+                    <hr style="background-color:#82C0CC">
+
+                    <label>
+                        Составление протокола по делу
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_of_preparing_report', 'date_of_initiation')" name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_of_preparing_report()}"/>
+                    </div>
+                    <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" >
+                        <option selected="selected" th:value="${el.getOffice_of_preparing_report()?.getId_office()}" th:text="${el.getOffice_of_preparing_report()} ? ${el.getOffice_of_preparing_report().getDepartment()}+' '+${el.getOffice_of_preparing_report().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
+                    </select>
+                    <input type="text" class="form-control" name="name_of_preparing_report" style="margin-top:15px;" placeholder="Должностное лицо">
+                    <select class="custom-select" name="article" style="margin-top:15px;" >
+                        <option selected="selected" th:value="${el.getId_article()?.getId_article()}" th:text="${el.getId_article()} ? ${el.getId_article().getDescription()} : 'Выберете номер статьи Кодекса Российской Федерации об административных правонарушениях'"></option>
+                        <option th:each="article : ${articles}" th:text="${article.getDescription()}" th:value="${article.getId_article()}"></option>
+                    </select>
+                    <hr style="background-color:#82C0CC">
+
+                    <label>
+                        Решение
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_of_decision', 'date_of_initiation')" name="date_of_decision" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_of_decision()}"/>
+                    </div>
+                    <select class="custom-select" name="office_of_decision"style="margin-top:15px;" >
+                        <option selected="selected" th:value="${el.getOffice_of_decision()?.getId_office()}" th:text="${el.getOffice_of_decision()} ? ${el.getOffice_of_decision().getDepartment()}+' '+${el.getOffice_of_decision().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
+                    </select>
+                    <input type="text" class="form-control" name="name_of_decision" style="margin-top:15px;" placeholder="Должностное лицо" th:value="${el.getName_of_decision()}">
+                    <input type="text" class="form-control" name="decision" style="margin-top:15px;" placeholder="Решение" th:value="${el.getDecision()}">
+                    <select class="custom-select" name="punishment" style="margin-top:15px;" >
+                        <option selected="selected" th:value="${el.getPunishment()?.getId_punishment()}" th:text="${el.getPunishment()} ? ${el.getPunishment().getName_punishment()} : 'Выберете наказание'"></option>
+                        <option th:each="punishment : ${punishments}" th:text="${punishment.getName_punishment()}" th:value="${punishment.getId_punishment()}"></option>
+                    </select>
+                    <input type="text" class="form-control" name="sum" style="margin-top:15px;" placeholder="Штраф" th:value="${el.getSum()}">
+                    <hr style="background-color:#82C0CC">
+
+                    <label>
+                        Дата вступления в силу решения
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_of_entry_into_force', 'date_of_decision')" name="date_of_entry_into_force" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_of_entry_into_force()}"/>
+                    </div>
+                    <hr style="background-color:#82C0CC">
+
+                    <label>
+                        Исполение
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_sentence_enforcement', 'date_of_entry_into_force')" name="date_sentence_enforcement" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_sentence_enforcement()}"/>
+                    </div>
+
+                    <input type="text" class="form-control" name="amount" style="margin-top:15px;" placeholder="Сумма оплаты штрафа" th:value="${el.getAmount()}">
+
+                </div>
+                <div class="col-md-4" th:each="el:${referral}">
+                    <label>
+                        Передача по подведомственности
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <p style="margin-top:15px;margin-right:15px">От:</p>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_departure()}"/>
+                    </div>
+                    <select class="custom-select" name="office_departure" >
+                        <option selected="selected" th:value="${el.getOffice_departure()?.getId_office()}" th:text="${el.getOffice_departure()} ? ${el.getOffice_departure().getDepartment()}+' '+${el.getOffice_departure().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
+                    </select>
+                    <div class="input-group" >
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <p style="margin-top:30px;margin-right:15px">Кому:</p>
+                        <input style="margin-top:15px;" class="form-control" id="date" onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_arrival()}"/>
+                    </div>
+                    <select class="custom-select" name="office_arrival" >
+                        <option selected="selected" th:value="${el.getOffice_arrival()?.getId_office()}" th:text="${el.getOffice_arrival()} ? ${el.getOffice_arrival().getDepartment()}+' '+${el.getOffice_arrival().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
+                    </select>
+                </div>
+            </div>
+            <hr style="background-color:#82C0CC">
+        </form>
+        </div>
+    </div>
+    </div>
+
+</main>
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[id="date"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'yyyy-mm-dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'HH:mm:ss'
+        });
+    });
+
+
+    function checkLessDateNow(dateInput) {
+        var date = document.getElementsByName(dateInput)[0];
+        if (date.value != null) {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            today = yyyy + "-" + mm + "-" + dd;
+            if (date.value <= today) {
+                date.className = "form-control is-valid";
+                return true;
+            } else {
+                date.className = "form-control is-invalid";
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function checkAfterDate(dateAfter, dateBefore){
+        if(checkLessDateNow(dateAfter)){
+            var newDateAfter = document.getElementsByName(dateAfter)[0];
+            var newDateBefore = document.getElementsByName(dateBefore)[0];
+            if ( newDateBefore.value!=null && newDateBefore.value!="" ){
+                if(newDateAfter.value>=newDateBefore.value){
+                    newDateAfter.className = "form-control is-valid";
+                }
+                else{
+                    newDateAfter.className = "form-control is-invalid";
+                }
+            }
+            else{
+                newDateBefore.className = "form-control is-invalid";
+            }
+        }
+
+    }
+
+</script>
+</body>
+</html>

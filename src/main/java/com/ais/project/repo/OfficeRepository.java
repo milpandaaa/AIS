@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface OfficeRepository extends CrudRepository<Offices, Integer> {
     Iterable<Offices> findAll(Sort sort);
+
 }

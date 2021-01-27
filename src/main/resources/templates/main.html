@@ -3,8 +3,118 @@
 <head th:insert="blocks/bootstrap::css"></head>
 <body>
 <div th:insert="blocks/header::header"></div>
-<p th:text="'Hello, ' + ${title} + '!'" />
+<div class="container">
+    <div class="row">
+        <canvas id="chBar"></canvas>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+
+<script>
+    /* chart.js chart examples */
+
+    // chart colors
+    var colors = ['#FFA62B','#489FB5','#82C0CC','#000000'];
+
+
+    /* bar chart */
+    var chBar = document.getElementById("chBar");
+    if (chBar) {
+        new Chart(chBar, {
+            type: 'bar',
+            data: {
+                labels: ["Совершение правонарушений", "Возбуждение дела", "Составление протокола по делу",
+                    "Решение", "Вступления в силу решения", "Исполение"],
+                datasets: [{
+                    label:"По выбранному отделу",
+                    data: [20, 17, 12, 8, 6, 4],
+                    backgroundColor: colors[0]
+                },
+                    {
+                        label:"Общее",
+                        data: [99, 79, 69, 59, 58, 32, 24],
+                        backgroundColor: colors[1]
+                    }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+                scales: {
+                    xAxes: [{
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.9
+                    }]
+                }
+            }
+        });
+    }
+
+
+</script>
 
 <div th:insert="blocks/bootstrap::script"></div>
 </body>
 </html>
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col">-->
+<!--            <h4>Bootstrap 4 Chart.js</h4>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row my-2">-->
+<!--        <div class="col-md-6 py-1">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <canvas id="chBar"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>-->
+
+<!--<script>-->
+<!--    /* chart.js chart examples */-->
+
+<!--    // chart colors-->
+<!--    var colors = ['#FFA62B','#489FB5','#82C0CC','#000000'];-->
+
+
+<!--    /* bar chart */-->
+<!--    var chBar = document.getElementById("chBar");-->
+<!--    if (chBar) {-->
+<!--        new Chart(chBar, {-->
+<!--            type: 'bar',-->
+<!--            data: {-->
+<!--                labels: ["Совершение правонарушений", "Возбуждение дела", "Составление протокола по делу",-->
+<!--                    "Решение", "Вступления в силу решения", "Исполение"],-->
+<!--                datasets: [{-->
+<!--                    label:"По выбранному отделу",-->
+<!--                    data: [20, 17, 12, 8, 6, 4],-->
+<!--                    backgroundColor: colors[0]-->
+<!--                },-->
+<!--                    {-->
+<!--                        label:"Общее",-->
+<!--                        data: [99, 79, 69, 59, 58, 32, 24],-->
+<!--                        backgroundColor: colors[1]-->
+<!--                    }]-->
+<!--            },-->
+<!--            options: {-->
+<!--                legend: {-->
+<!--                    display: true,-->
+<!--                    position: 'bottom',-->
+<!--                },-->
+<!--                scales: {-->
+<!--                    xAxes: [{-->
+<!--                        barPercentage: 0.6,-->
+<!--                        categoryPercentage: 0.9-->
+<!--                    }]-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+
+<!--</script>-->

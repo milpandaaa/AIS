@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="blocks/bootstrap::css"></head>
 
 
@@ -109,7 +111,7 @@
 
         <div class="col col-lg-12 col-md-12 col-xs-12 article-col">
 
-            <form class="needs-validation" novalidate th:action="@{/{path}/(path=${action})}" method="post">
+            <form class="needs-validation" novalidate th:action="@{/{path}(path=${action})}" method="post">
 
                 <label th:text="${nameClass}"></label>
                 <div class="form-row">

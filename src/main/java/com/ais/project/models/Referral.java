@@ -61,6 +61,14 @@ public class Referral {
         this.date_arrival = date_arrival;
     }
 
+    public Offices getOffice_arrival() {
+        return office_arrival;
+    }
+
+    public void setOffice_arrival(Offices office_arrival) {
+        this.office_arrival = office_arrival;
+    }
+
     public Referral(Long card, String date_departure, Offices office_departure, String date_arrival, Offices office_arrival) {
         this.card = card;
         this.date_departure = date_departure;

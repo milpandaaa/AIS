@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Авторизация в системе</title>
     <meta charset="utf-8">
@@ -35,16 +36,22 @@
 <body>
 <div class="container">
     <div class="row mgTp">
-        <form class="col-md-6 offset-md-3">
+        <form th:action="@{/login}" method="post" class="col-md-6 offset-md-3">
             <h3 class="title" style="text-align:center;">Авторизация в системе</h3>
             <hr class="divisor">
+                <div th:if="${param.error}">
+                    Неверный логин или пароль.
+                </div>
+                <div th:if="${param.logout}">
+                    Вы уже вышли.
+                </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Логин</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Логин">
+                <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Логин">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
             </div>
             <br>
             <button type="submit" class="btn btn-dark"><i class="fa fa-sign-in"></i> Войти </button>
@@ -54,3 +61,24 @@
 </body>
 
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
+<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
+<!--<head>-->
+<!--    <title>Spring Security Example </title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:if="${param.error}">-->
+<!--    Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--    You have been logged out.-->
+<!--</div>-->
+<!--<form th:action="@{/login/}" method="post">-->
+<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
+<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
+<!--    <div><input type="submit" value="Sign In"/></div>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

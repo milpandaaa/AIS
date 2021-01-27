@@ -236,6 +236,62 @@ public class Card {
         this.time_of_commission = time_of_commission;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Countries getCountry() {
+        return country;
+    }
+
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
+
+    public Offices getOffice_of_initiation() {
+        return office_of_initiation;
+    }
+
+    public void setOffice_of_initiation(Offices office_of_initiation) {
+        this.office_of_initiation = office_of_initiation;
+    }
+
+    public Offices getOffice_of_preparing_report() {
+        return office_of_preparing_report;
+    }
+
+    public void setOffice_of_preparing_report(Offices office_of_preparing_report) {
+        this.office_of_preparing_report = office_of_preparing_report;
+    }
+
+    public Article getId_article() {
+        return id_article;
+    }
+
+    public void setId_article(Article id_article) {
+        this.id_article = id_article;
+    }
+
+    public Offices getOffice_of_decision() {
+        return office_of_decision;
+    }
+
+    public void setOffice_of_decision(Offices office_of_decision) {
+        this.office_of_decision = office_of_decision;
+    }
+
+    public Punishment getPunishment() {
+        return punishment;
+    }
+
+    public void setPunishment(Punishment punishment) {
+        this.punishment = punishment;
+    }
+
     public Card(Long id_card, String last_name, Names first_name, Patronymics patronymic, String date_of_birth,
                 Gender gender, Countries country, Integer region, String outdoors, String time_of_commission,
                 String date_of_commission, String place_of_commission, String date_of_initiation,
@@ -272,5 +328,39 @@ public class Card {
         this.date_of_entry_into_force = date_of_entry_into_force;
         this.date_sentence_enforcement = date_sentence_enforcement;
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id_card=" + id_card +
+                ", last_name='" + last_name + '\'' +
+                ", first_name=" + first_name +
+                ", patronymic=" + patronymic +
+                ", date_of_birth='" + date_of_birth + '\'' +
+                ", gender=" + gender +
+                ", country=" + country +
+                ", region=" + region +
+                ", outdoors='" + outdoors + '\'' +
+                ", time_of_commission='" + time_of_commission + '\'' +
+                ", date_of_commission='" + date_of_commission + '\'' +
+                ", place_of_commission='" + place_of_commission + '\'' +
+                ", date_of_initiation='" + date_of_initiation + '\'' +
+                ", office_of_initiation=" + office_of_initiation +
+                ", name_of_initiation='" + name_of_initiation + '\'' +
+                ", date_of_preparing_report='" + date_of_preparing_report + '\'' +
+                ", office_of_preparing_report=" + office_of_preparing_report +
+                ", name_of_preparing_report='" + name_of_preparing_report + '\'' +
+                ", id_article=" + id_article +
+                ", date_of_decision='" + date_of_decision + '\'' +
+                ", decision='" + decision + '\'' +
+                ", office_of_decision=" + office_of_decision +
+                ", name_of_decision='" + name_of_decision + '\'' +
+                ", punishment=" + punishment +
+                ", sum=" + sum +
+                ", date_of_entry_into_force='" + date_of_entry_into_force + '\'' +
+                ", date_sentence_enforcement='" + date_sentence_enforcement + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }

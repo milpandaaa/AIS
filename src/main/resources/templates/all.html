@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="blocks/bootstrap::css"></head>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 
@@ -32,7 +34,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="card : ${cards}" class="clickable" th:onclick="'window.location.href = \'' + @{/ID/{id}(id=${card.getId_card()})} + '\''">
+    <tr th:each="card : ${cards}" class="clickable" th:onclick="'window.location.href = \'' + @{/{id}/edit(id=${card.getId_card()})} + '\''">
         <td th:text="${card.getId_card()}"></td>
         <td th:text="${card.getFull_name()}"></td>
         <td th:text="${card.getDate_of_birth()}"></td>
@@ -40,16 +42,14 @@
         <td th:text="${card.getPlace_of_commission()}"></td>
     </tr>
 
-<!--    <a th:href="'/ID/'+${card.getId_card()}"></a>-->
-
     </tbody>
     <tfoot>
     <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Office</th>
-        <th>Age</th>
-        <th>Start date</th>
+        <th>Номер дела</th>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Дата и время совершения правонарушения</th>
+        <th>Место совершения правонарушени</th>
     </tr>
     </tfoot>
     </table>
