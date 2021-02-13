@@ -2,20 +2,15 @@ package com.ais.project.controller;
 
 import com.ais.project.models.*;
 import com.ais.project.repo.*;
+import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.sql.SQLOutput;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,12 +38,49 @@ class MainController{
 
     @GetMapping("/")
     public String main(Model model) {//всегда принимает модель
-        List<Offices> offices = (List<Offices>) officeRepository.findAll();
-//        Map<Integer, List<Integer>> collect = offices.stream()
-//                .map(Offices::getId_office)
-//                .collect(Collectors.groupingBy(s -> s.charAt(0)));
-        model.addAttribute("title", "Главная страница");//передаем параметры
+        Iterable<Offices> offices = officeRepository.findAll();
+
+        List<Card> cards = (List<Card>) cardRepository.findAll();
+
+        HashMap<Integer, List<Integer>> integerListHashMap = new HashMap<>();
+        Set<Integer> ids = new HashSet<>();
+        for (Card card : cards) {
+            add(card.getOffice_of_initiation(), ids);
+            add(card.getOffice_of_preparing_report(), ids);
+            add(card.getOffice_of_decision(), ids);
+        }
+
+        for (Integer id : ids) {
+            Integer i1 = 0;
+            Integer i2 = 0;
+            Integer i3 = 0;
+            for (Card card : cards) {
+                i1 = count(id, i1, card.getOffice_of_initiation());
+                i2 = count(id, i2, card.getOffice_of_preparing_report());
+                i3 = count(id, i3, card.getOffice_of_decision());
+            }
+            List<Integer> integers = Arrays.asList(i1, i2, i3);
+            //подсчет мат ожидания и добавление его в лист
+            integerListHashMap.put(id, integers);
+        }
+
+        model.addAttribute("title", "Статистика");
+        model.addAttribute("officesCount", integerListHashMap);
+        model.addAttribute("offices", offices);
         return "main";//переход на шаблон main.html
+    }
+
+    private static Integer count(Integer id, Integer i1, Offices office) {
+        if (office != null && id.equals(office.getId_office())) {
+            i1++;
+        }
+        return i1;
+    }
+
+    private static void add(Offices office, Set<Integer> ids) {
+        if (office != null) {
+            ids.add(office.getId_office());
+        }
     }
 
     @GetMapping("/new")
@@ -91,6 +123,7 @@ class MainController{
         Referral referral = new Referral(Long.parseLong(fullId), date_departure, office_departure,
                 date_arrival, office_arrival);
         referralRepository.save(referral);
+
         return "redirect:/all/";
     }
 
@@ -144,9 +177,20 @@ class MainController{
         return "redirect:/newPatronymic";
     }
 
+
+    @RequestMapping(value = "/seach", method=RequestMethod.GET)
+    public String seach(Model model, @RequestParam(value = "id") long id){
+        if(cardRepository.findById(id).isPresent()) {
+            return"redirect:/{id}/edit";
+        }
+        model.addAttribute("card", "res");
+        return null;
+    }
+
+
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable(value = "id") long id, Model model) {
-        if(!cardRepository.existsById(id)){
+        if(cardRepository.findById(id).isEmpty()){
             return "redirect:/all";
         }
         Optional<Card> card = cardRepository.findById(id);
