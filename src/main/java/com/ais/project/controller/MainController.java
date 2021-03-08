@@ -64,24 +64,16 @@ class MainController {
 
         model.addAttribute("expectedValueAll", cardRepository.expectedValue().split(","));
 
-        HashMap<Integer, ArrayList<String>> expectedValueOffices = new HashMap<>();
-        for (String strInit : cardRepository.expectedValueInitiation()) {
-            String[] strInit2 = strInit.split(",");
-            expectedValueOffices.put(Integer.parseInt(strInit2[0]), new ArrayList<>(Collections.singleton(strInit2[1])));
-        }
+        HashMap<String, List<Double>> expectedValueOffices = new HashMap<>();
 
-        for (String strPrepRep : cardRepository.expectedValuePreparingReport()) {
-            hashMapOffices(expectedValueOffices, strPrepRep);
-        }
 
-        for (String strDec : cardRepository.expectedValueDecision()) {
-            hashMapOffices(expectedValueOffices, strDec);
-        }
+        addToMap(expectedValueOffices, cardRepository.expectedValueInitiation(), 0);
+        addToMap(expectedValueOffices, cardRepository.expectedValuePreparingReport(), 1);
+        addToMap(expectedValueOffices, cardRepository.expectedValueDecision(), 2);
 
-        for (Map.Entry<Integer, ArrayList<String>> entry : expectedValueOffices.entrySet()){
-            System.out.println(entry.toString());
-        }
+        model.addAttribute("expectedValueOffices", expectedValueOffices);
 
+        model.addAttribute("quantityOffices",cardRepository.quantityOffices().split(","));
 
         model.addAttribute("title", "Статистика");
         model.addAttribute("officesCount", integerListHashMap);
@@ -89,14 +81,30 @@ class MainController {
         return "main";//переход на шаблон main.html
     }
 
-    private void hashMapOffices(HashMap<Integer, ArrayList<String>> expectedValueOffices, String strDec) {
-        String[] strDec2 = strDec.split(",");
-        for(Map.Entry<Integer, ArrayList<String>> entry : expectedValueOffices.entrySet()) {
-            if (entry.getKey() == Integer.parseInt(strDec2[0])){
-                entry.getValue().add(strDec2[1]);
+    private static void addToMap(HashMap<String, List<Double>> map, String[][] array, int index) {
+        for (String[] strings : array) {
+            if (strings == null){
+                continue;
             }
+            map.compute(strings[0], (key, value) -> {
+                if (value == null) {
+                    value = Arrays.asList(0d,0d,0d);
+                }
+                value.set(index, getDigit(strings[1]));
+                return value;
+            });
         }
-        expectedValueOffices.put(Integer.parseInt(strDec2[0]), new ArrayList<>(Collections.singleton(strDec2[1])));
+    }
+
+    private static double getDigit(String value) {
+        return Optional.ofNullable(value)
+                .map(str -> {
+                    try {
+                        return Double.parseDouble(str);
+                    } catch (NumberFormatException e) {
+                        return 0D;
+                    }
+                }).orElse(0D);
     }
 
 

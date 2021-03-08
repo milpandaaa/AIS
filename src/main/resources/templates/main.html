@@ -23,27 +23,27 @@
 <div class="container">
     <div class="row my-2">
         <div class="col-md-8 py-1">
-            <canvas id="chDonut1"></canvas>
+            <canvas id="chBar"></canvas>
         </div>
         <div class="col-6 col-md-4">
-            <h6>По дате</h6>
-            <hr style="background-color:#82C0CC">
+<!--            <h6>По дате</h6>-->
+<!--            <hr style="background-color:#82C0CC">-->
 
-            <label class="control-label col-sm-2 requiredField" for="dateStart" >От</label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input class="form-control" id="dateStart" placeholder="YYYY-MM-DD" type="text"/>
-            </div>
+<!--            <label class="control-label col-sm-2 requiredField" for="dateStart" >От</label>-->
+<!--            <div class="input-group">-->
+<!--                <div class="input-group-addon">-->
+<!--                    <i class="fa fa-calendar"></i>-->
+<!--                </div>-->
+<!--                <input class="form-control" id="dateStart" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--            </div>-->
 
-            <label class="control-label col-sm-2 requiredField" for="dateEnd" >До</label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input class="form-control" id="dateEnd" placeholder="YYYY-MM-DD" type="text"/>
-            </div>
+<!--            <label class="control-label col-sm-2 requiredField" for="dateEnd" >До</label>-->
+<!--            <div class="input-group">-->
+<!--                <div class="input-group-addon">-->
+<!--                    <i class="fa fa-calendar"></i>-->
+<!--                </div>-->
+<!--                <input class="form-control" id="dateEnd" placeholder="YYYY-MM-DD" type="text"/>-->
+<!--            </div>-->
 
             <h6>По отделу</h6>
             <hr style="background-color:#82C0CC">
@@ -52,26 +52,32 @@
                 <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
             </select>
             <hr style="background-color:#82C0CC">
-            <button type="submit" class="btn btn-warning"><i class="fa fa-sign-in"></i> Применить фильтр </button>
-        </div>
+            </div>
     </div>
-    <canvas id="chBar"></canvas>
+    <div class="col-md-6 py-1">
+    <canvas id="chDonut1" ></canvas>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
 
+
     function selectOffice(){
         var idSelectedOffice = document.getElementById("selectOffice").value;
-
+        var expectedValues = /*[[${expectedValueOffices}]]*/ [10, 10, 10];
+        var expectedValues0 = /*[[${expectedValueAll[0]}]]*/ 10;
+        var expectedValues4 = /*[[${expectedValueAll[4]}]]*/ 10;
+        myChart.data.datasets[0].data = [expectedValues0, expectedValues[idSelectedOffice][0], expectedValues[idSelectedOffice][1],
+                                expectedValues[idSelectedOffice][2], expectedValues4];
+        myChart.update();
     }
 
-    var colors = ['#FFA62B','#489FB5','#82C0CC','#000000'];
+    var colors = ['#FFA62B','#489FB5','#82C0CC','#000000', '#eac77d'];
 
     var chBar = document.getElementById("chBar");
-    if (chBar) {
-        new Chart(chBar, {
+    var myChart = new Chart(chBar, {
             type: 'bar',
             data: {
                 labels: ["Совершение правонарушений", "Возбуждение дела", "Составление протокола по делу",
@@ -102,8 +108,7 @@
                 }
             }
         });
-    }
-    /*]]>*/
+
 
     var donutOptions = {
         cutoutPercentage: 85,
@@ -113,12 +118,14 @@
 
     // donut 1
     var chDonutData1 = {
-        labels: ['Bootstrap', 'Popper', 'Other'],
+        labels: ["Совершение правонарушений", "Возбуждение дела", "Составление протокола по делу",
+            "Решение", "Вступления в силу решения", "Исполнение"],
         datasets: [
             {
-                backgroundColor: colors.slice(0,3),
+                backgroundColor: colors.slice(0,5),
                 borderWidth: 0,
-                data: [74, 11, 40]
+                data: [ /*[[${quantityOffices[0]}]]*/, /*[[${quantityOffices[1]}]]*/ , /*[[${quantityOffices[2]}]]*/ ,
+                    /*[[${quantityOffices[3]}]]*/ ,/*[[${quantityOffices[4]}]]*/ , /*[[${quantityOffices[5]}]]*/ ]
             }
         ]
     };
@@ -153,7 +160,7 @@
             autoclose: true,
         })
     })
-
+    /*]]>*/
 
 
 </script>
