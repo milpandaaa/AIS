@@ -19,7 +19,7 @@ public interface CardRepository extends CrudRepository<Card, Long> {
 
     @Query( value = "SELECT id_office," +
             "avg( DATEDIFF (STR_TO_DATE(date_of_decision, '%Y-%m-%d'), STR_TO_DATE(date_of_preparing_report, '%Y-%m-%d')) )" +
-            "FROM ais.card, ais.offices" +
+            "FROM ais.card, ais.offices " +
             "where card.office_of_preparing_report = offices.id_office " +
             "group by id_office;" ,
             nativeQuery = true)
@@ -35,8 +35,8 @@ public interface CardRepository extends CrudRepository<Card, Long> {
 
     @Query( value = "SELECT id_office," +
             "avg( DATEDIFF (STR_TO_DATE(date_of_entry_into_force, '%Y-%m-%d'), STR_TO_DATE(date_of_decision, '%Y-%m-%d')) )" +
-            "FROM ais.card, ais.offices" +
-            "where card.office_of_decision = offices.id_office" +
+            "FROM ais.card, ais.offices " +
+            "where card.office_of_decision = offices.id_office " +
             "group by id_office;", nativeQuery = true)
     public String[] expectedValueDecision();
 
