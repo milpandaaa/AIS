@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 class MainController{
@@ -119,6 +120,18 @@ class MainController{
         SimpleDateFormat format = new SimpleDateFormat();
         format.applyPattern("yyyy-MM-dd");
         return ( format.parse(startDate).getTime() - format.parse(endDate).getTime() )/ (24 * 60 * 60 * 1000);
+    }
+
+
+
+
+    @RequestMapping(value = "/seach", method=RequestMethod.GET)
+    public String seach(Model model, @RequestParam(value = "id") long id){
+        if(cardRepository.findById(id).isPresent()) {
+            return"redirect:/{id}/edit";
+        }
+        model.addAttribute("card", "res");
+        return null;
     }
 
 
