@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:insert="blocks/bootstrap::css"></head>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 
@@ -45,7 +45,7 @@
     </tbody>
     <tfoot>
     <tr>
-        <th>Номер дела</th>
+        <th> Номер дела</th>
         <th>ФИО</th>
         <th>Дата рождения</th>
         <th>Дата и время совершения правонарушения</th>
@@ -60,7 +60,6 @@
 
 <script>
     $(document).ready(function() {
-        // Setup - add a text input to each footer cell
         $('#example tfoot th').each( function () {
             var title = $(this).text();
             $(this).html( '<input type="text" placeholder="Search '+title+'" />' );

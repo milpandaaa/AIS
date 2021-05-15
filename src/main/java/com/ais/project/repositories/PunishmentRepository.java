@@ -1,4 +1,4 @@
-package com.ais.project.repo;
+package com.ais.project.repositories;
 
 import com.ais.project.models.Punishment;
 import org.springframework.data.domain.Sort;

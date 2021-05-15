@@ -1,7 +1,7 @@
 package com.ais.project.controller;
 
 import com.ais.project.models.*;
-import com.ais.project.repo.*;
+import com.ais.project.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 class MainController {
@@ -131,7 +130,7 @@ class MainController {
 
 
     @RequestMapping(value = "/seach", method=RequestMethod.GET)
-    public String seach(Model model, @RequestParam(value = "id") long id){
+    public String search(Model model, @RequestParam(value = "id") long id){
         if(cardRepository.findById(id).isPresent()) {
             return"redirect:/{id}/edit";
         }

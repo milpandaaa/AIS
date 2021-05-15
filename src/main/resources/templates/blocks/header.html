@@ -8,17 +8,16 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="p-3 text-white" href="/new">Оформление дела</a>
         <a class="p-3 text-white" href="/all">Дооформление дела</a>
-        <a class="p-3 text-white nav-link dropdown-toggle" data-toggle="dropdown" role="button">Пополнить словари</a>
+        <a sec:authorize="${hasRole('ADMIN')}" class="p-3 text-white nav-link dropdown-toggle" data-toggle="dropdown" role="button">Пополнить словари</a>
         <div class="dropdown-menu" style="background:#489FB5">
             <a class="dropdown-item" href="/newName" style="color: #fff;">Словарь имен</a>
             <a class="dropdown-item" href="/newPatronymic" style="color: #fff;">Словарь отчеств</a>
         </div>
         <a class="p-3 text-white" href="/">Статистика</a>
-<!--        <a class="p-3 text-white" href="/logout">Выйти</a>-->
-<!--        <a th:action="@{/logout}" class="p-3 text-white" method="post">-->
-<!--            <input type="submit"  value="Sign Out"/>-->
-<!--        </a>-->
-        <!--        <a class="p-3 text-white nav-link dropdown-toggle" data-toggle="dropdown" role="button">ФИО</a>-->
+        <a sec:authorize="${hasRole('ADMIN')}" class="p-3 text-white" href="https://wakedeer.github.io/GraphEditor/">
+            Структурно-функциональный синтез управления производством
+        </a>
+        <a class="p-3 text-white" href="/logout">Выйти</a>cm
     </div>
 </nav>
 </div>

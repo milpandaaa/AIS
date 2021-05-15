@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <!--<head th:insert="blocks/bootstrap::css"></head>-->
 <head th:insert="blocks/bootstrap::css">
     <meta charset="utf-8">
@@ -44,14 +45,19 @@
 <!--                </div>-->
 <!--                <input class="form-control" id="dateEnd" placeholder="YYYY-MM-DD" type="text"/>-->
 <!--            </div>-->
-
+            <div class="form-group col-md-4">
             <h6>По отделу</h6>
+
+            </div>
             <hr style="background-color:#82C0CC">
             <select class="custom-select" id="selectOffice" style="margin-top:15px;" required onchange="selectOffice()">
                 <option selected="selected" value="" >Выберете ОИАЗ</option>
                 <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
             </select>
             <hr style="background-color:#82C0CC">
+            <div class="form-group col-md-1">
+                <a type="submit" class="btn btn-dark"><i class="fa fa-sign-in" href="https://wakedeer.github.io/GraphEditor/"></i> Построить</a>
+            </div>
             </div>
     </div>
     <div class="col-md-6 py-1">

@@ -1,9 +1,6 @@
-package com.ais.project.repo;
+package com.ais.project.repositories;
 
-import com.ais.project.models.Article;
-import com.ais.project.models.Card;
 import com.ais.project.models.Countries;
-import com.ais.project.models.Names;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 
