@@ -1,10 +1,6 @@
 package com.ais.project.controller;
 
 import com.ais.project.models.*;
-import com.ais.project.repo.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

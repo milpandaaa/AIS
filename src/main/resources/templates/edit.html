@@ -53,7 +53,7 @@
 
                     <label class="control-label col-sm-2" >Имя</label>
                     <select name="first_name" class="custom-select required" >
-                        <option selected="selected" th:value="${el.getFirst_name()?.getId_name()}" th:text="${el.getFirst_name().getName()} ? ${el.getFirst_name().getName()} : 'Выберете имя'"></option>
+                        <option selected="selected" th:value="${el.getFirst_name().getId_name()}" th:text="${el.getFirst_name().getName()} ? ${el.getFirst_name().getName()} : 'Выберете имя'"></option>
                         <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name.getId_name()}" ></option>
                     </select>
 
