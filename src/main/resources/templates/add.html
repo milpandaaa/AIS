@@ -20,48 +20,42 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
-
-    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>-->
-    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />-->
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>-->
-
-
-
 </head>
 <body>
 <div th:insert="blocks/header::header"></div>
 <main role="main">
     <div class="container">
-        <form class="needs-validation" novalidate action="/new" method="post">
+        <form class="needs-validation" novalidate action="/new" method="post" >
 
             <h3>Номер дела</h3>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <input type="number" class="form-control" name="id_card_1" id="id_card_1" required>
+                    <input type="number" min="1" step="1" class="form-control" name="id_card_1" id="id_card_1" required>
                     <p style="font-size: 14px;margin-bottom: -40px;">Номер ОИАЗ</p>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="number" class="form-control" name="id_card_2" id="id_card_2" required>
+                    <input type="number" min="1" step="1" class="form-control" name="id_card_2" id="id_card_2" required>
                     <p style="font-size: 14px;margin-bottom: -40px;">Район</p>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="number" class="form-control" name="id_card_3" id="id_card_3" required>
+                    <input type="number" min="1" step="1" class="form-control" name="id_card_3" id="id_card_3" required>
                     <p style="font-size: 14px;margin-bottom: -40px;">Год</p>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="number" class="form-control" name="id_card_4" id="id_card_4" required >
+                    <input type="number" min="1" step="1" class="form-control" name="id_card_4" id="id_card_4" required >
                     <p style="font-size: 14px;margin-bottom: -40px;">Порядковый номер</p>
                 </div>
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-4">
                     <input type="button" class="btn btn-warning" onclick="search()" value="Найти"/>
+                    или
+                    <button type="submit" class="btn btn-dark"><i class="fa fa-sign-in"></i> Создать</button>
                 </div>
                 <div class="form-group col-md-2">
+
                     <h6 style="color: #FFA62B; margin-top: 10px; display: none;" id="status">Дело не создано</h6>
                 </div>
 
                 <div class="form-group col-md-1">
-                    <button type="submit" class="btn btn-dark"><i class="fa fa-sign-in"></i> Создать</button>
                 </div>
             </div>
             <hr style="background-color:#82C0CC">
@@ -111,7 +105,7 @@
                         <option th:each="country : ${countries}" th:text="${country.getCountry()}"
                                 th:value="${country.getId_country()}"></option>
                     </select>
-                    <input type="text" class="form-control" style="margin-top:15px;" placeholder="Номер региона"
+                    <input type="number" min="1" step="1" max="90" class="form-control" style="margin-top:15px;" placeholder="Номер региона"
                            id="region" name="region">
                     <input type="text" class="form-control" style="margin-top:15px;" placeholder="Адрес" id="outdoors"
                            name="outdoors">
@@ -368,6 +362,7 @@
     }
 
 
+   
 </script>
 </body>
 </html>
