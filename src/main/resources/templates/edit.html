@@ -53,13 +53,14 @@
 
                     <label class="control-label col-sm-2" >Имя</label>
                     <select name="first_name" class="custom-select required" >
-                        <option selected="selected" th:value="${el.getFirst_name().getId_name()}" th:text="${el.getFirst_name().getName()} ? ${el.getFirst_name().getName()} : 'Выберете имя'"></option>
+                        <option selected="selected" th:value="${el.getFirst_name()?.getId_name()}"
+                                th:text="${el.getFirst_name()?.getName()} ? ${el.getFirst_name().getName()} : 'Выберете имя'"></option>
                         <option th:each="name : ${names}" th:text="${name.getName()}" th:value="${name.getId_name()}" ></option>
                     </select>
 
                     <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>
                     <select class="custom-select" name="patronymic" id="patronymic" >
-                        <option selected="selected" th:value="${el.getPatronymic()?.getId_patronymic()}" th:text="${el.getPatronymic().getPatronymic()} ? ${el.getPatronymic().getPatronymic()} : 'Выберете отчество'"></option>
+                        <option selected="selected" th:value="${el.getPatronymic()?.getId_patronymic()}" th:text="${el.getPatronymic()?.getPatronymic()} ? ${el.getPatronymic().getPatronymic()} : 'Выберете отчество'"></option>
                         <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}" th:value="${patronymic.getId_patronymic()}"></option>
                     </select>
 
@@ -287,6 +288,8 @@
         }
 
     }
+
+
 
 </script>
 </body>

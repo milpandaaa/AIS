@@ -29,7 +29,7 @@
 
             <h3>Номер дела</h3>
             <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2 needs-validation">
                     <input type="number" min="1" step="1" class="form-control" name="id_card_1" id="id_card_1" required>
                     <p style="font-size: 14px;margin-bottom: -40px;">Номер ОИАЗ</p>
                 </div>
@@ -67,14 +67,14 @@
 
 
                     <label class="control-label col-sm-2">Имя</label>
-                    <select name="first_name" class="custom-select required" required>
+                    <select name="first_name" class="custom-select required" >
                         <option selected="selected" value="">Выберете имя</option>
                         <option th:each="name : ${names}" th:text="${name.getName()}"
                                 th:value="${name.getId_name()}"></option>
                     </select>
 
                     <label class="control-label col-sm-2 requiredField" for="patronymic">Отчество</label>
-                    <select class="custom-select" name="patronymic" id="patronymic" required>
+                    <select class="custom-select" name="patronymic" id="patronymic" >
                         <option selected="selected" value="">Выберете отчество</option>
                         <option th:each="patronymic : ${patronymics}" th:text="${patronymic.getPatronymic()}"
                                 th:value="${patronymic.getId_patronymic()}"></option>
@@ -93,14 +93,14 @@
                     </div>
 
                     <label class="control-label col-sm-2 requiredField" for="sex">Пол</label>
-                    <select class="custom-select" id="sex" name="gender" required>
+                    <select class="custom-select" id="sex" name="gender" >
                         <option selected="selected" value="">Выберете пол</option>
                         <option th:each="gender : ${genders}" th:text="${gender.getGender()}"
                                 th:value="${gender.getId_gender()}"></option>
                     </select>
 
                     <label for="country" style="padding-left:15px;">Место регистрации</label>
-                    <select class="custom-select" id="country" name="county" required>
+                    <select class="custom-select" id="country" name="county" >
                         <option selected="selected" value="">Выберете страну</option>
                         <option th:each="country : ${countries}" th:text="${country.getCountry()}"
                                 th:value="${country.getId_country()}"></option>
@@ -125,10 +125,11 @@
                             </i>
                         </div>
                         <input class="form-control" id="date" onchange="checkLessDateNow('date_of_commission')"
-                               name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;" required/>
+                               name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;"
+                               required/>
                     </div>
-                    <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" required
-                           placeholder="Место правонарушения">
+                    <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;"
+                           placeholder="Место правонарушения" required>
                     <hr style="background-color:#82C0CC">
 
                     <label>
@@ -143,7 +144,7 @@
                                onchange="checkAfterDate('date_of_initiation', 'date_of_commission')"
                                name="date_of_initiation" placeholder="YYYY-MM-DD" type="text"/>
                     </div>
-                    <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" required>
+                    <select class="custom-select" name="office_of_initiation" style="margin-top:15px;" >
                         <option selected="selected" value="">Выберете ОИАЗ</option>
                         <option th:each="office : ${offices}"
                                 th:text="${office.getDepartment()}+' '+(${office.getOffice()})"
@@ -165,7 +166,7 @@
                                onchange="checkAfterDate('date_of_preparing_report', 'date_of_initiation')"
                                name="date_of_preparing_report" placeholder="YYYY-MM-DD" type="text"/>
                     </div>
-                    <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" required>
+                    <select class="custom-select" name="office_of_preparing_report" style="margin-top:15px;" >
                         <option selected="selected" value="">Выберете ОИАЗ</option>
                         <option th:each="office : ${offices}"
                                 th:text="${office.getDepartment()}+' '+(${office.getOffice()})"
@@ -173,7 +174,7 @@
                     </select>
                     <input type="text" class="form-control" name="name_of_preparing_report" style="margin-top:15px;"
                            placeholder="Должностное лицо">
-                    <select class="custom-select" name="article" style="margin-top:15px;" required>
+                    <select class="custom-select" name="article" style="margin-top:15px;" >
                         <option selected="selected" value="">Выберете номер статьи Кодекса Российской Федерации об
                             административных правонарушениях
                         </option>
@@ -194,7 +195,7 @@
                                onchange="checkAfterDate('date_of_decision', 'date_of_initiation')"
                                name="date_of_decision" placeholder="YYYY-MM-DD" type="text"/>
                     </div>
-                    <select class="custom-select" name="office_of_decision" style="margin-top:15px;" required>
+                    <select class="custom-select" name="office_of_decision" style="margin-top:15px;" >
                         <option selected="selected" value="">Выберете ОИАЗ</option>
                         <option th:each="office : ${offices}"
                                 th:text="${office.getDepartment()}+' '+(${office.getOffice()})"
@@ -204,7 +205,7 @@
                            placeholder="Должностное лицо">
                     <input type="text" class="form-control" name="decision" style="margin-top:15px;"
                            placeholder="Решение">
-                    <select class="custom-select" name="punishment" style="margin-top:15px;" required>
+                    <select class="custom-select" name="punishment" style="margin-top:15px;" >
                         <option selected="selected" value="">Выберете вид наказания</option>
                         <option th:each="punishment : ${punishments}" th:text="${punishment.getName_punishment()}"
                                 th:value="${punishment.getId_punishment()}"></option>
@@ -257,7 +258,7 @@
                                onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure"
                                placeholder="YYYY-MM-DD" type="text"/>
                     </div>
-                    <select class="custom-select" name="office_departure" required>
+                    <select class="custom-select" name="office_departure" >
                         <option selected="selected" value="">Выберете ОИАЗ</option>
                         <option th:each="office : ${offices}"
                                 th:text="${office.getDepartment()}+' '+(${office.getOffice()})"
@@ -273,7 +274,7 @@
                                onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival"
                                placeholder="YYYY-MM-DD" type="text"/>
                     </div>
-                    <select class="custom-select" name="office_arrival" required>
+                    <select class="custom-select" name="office_arrival" >
                         <option selected="selected" value="">Выберете ОИАЗ</option>
                         <option th:each="office : ${offices}"
                                 th:text="${office.getDepartment()}+' '+(${office.getOffice()})"
@@ -361,8 +362,24 @@
         });
     }
 
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
 
-   
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+
 </script>
 </body>
 </html>
