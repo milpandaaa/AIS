@@ -29,10 +29,10 @@
             <label></label>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <h5>Номер дела</h5>
+                    <h3>Номер дела</h3>
                 </div>
                 <div class="form-group col-md-2">
-                    <h5 th:text="${el.getId_card()}"></h5>
+                    <h3 th:text="${el.getId_card()}"> 234</h3>
                 </div>
                 <div class="form-group col-md-2">
                 </div>
@@ -94,16 +94,16 @@
                     <label >
                         Совершение правонарушений
                     </label>
-                    <input type="text" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" name="time_of_commission" data-target="#datetimepicker3" placeholder="HH:MM:SS" th:value="${el.getTime_of_commission()}"/>
+                    <input type="text" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" name="time_of_commission" data-target="#datetimepicker3" placeholder="HH:MM:SS" th:value="${el.getTime_of_commission()}" readonly/>
 
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar">
                             </i>
                         </div>
-                        <input class="form-control" id="date" onchange="checkLessDateNow('date_of_commission')" name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;" th:value="${el.getDate_of_commission()}"/>
+                        <input class="form-control" id="date" onchange="checkLessDateNow('date_of_commission')" name="date_of_commission" placeholder="YYYY-MM-DD" type="text" style="margin-top:15px;" th:value="${el.getDate_of_commission()}" readonly/>
                     </div>
-                    <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" placeholder="Место правонарушения" th:value="${el.getPlace_of_commission()}">
+                    <input type="text" class="form-control" name="place_of_commission" style="margin-top:15px;" placeholder="Место правонарушения" th:value="${el.getPlace_of_commission()}" readonly>
                     <hr style="background-color:#82C0CC">
 
                     <label>
