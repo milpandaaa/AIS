@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head th:insert="blocks/bootstrap::css"></head>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 
@@ -67,6 +67,9 @@
 
         // DataTable
         var table = $('#example').DataTable({
+            language: {
+                "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Russian.json"
+            },
             initComplete: function () {
                 // Apply the search
                 this.api().columns().every( function () {
@@ -82,7 +85,6 @@
                 } );
             }
         });
-
     } );
 
 
