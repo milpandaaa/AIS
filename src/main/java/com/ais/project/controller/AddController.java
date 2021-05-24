@@ -61,10 +61,12 @@ public class AddController extends MainController{
                 date_of_entry_into_force,
                 date_sentence_enforcement, amount);
         cardRepository.save(card);
-        Referral referral = new Referral(Long.parseLong(fullId), date_departure, office_departure,
-                date_arrival, office_arrival);
-        referralRepository.save(referral);
-
+        if( date_departure.length()!=0 ||  date_arrival .length()!=0 ||office_departure!=null || office_arrival!=null)
+        {
+            Referral referral = new Referral(card, date_departure, office_departure,
+                    date_arrival, office_arrival);
+            referralRepository.save(referral);
+        }
         return "redirect:/all/";
     }
 
@@ -85,8 +87,10 @@ public class AddController extends MainController{
 
     @PostMapping("/newName")
     public String addNewName(Model model, @RequestParam String name) {
-        Names newName = new Names(name);
-        nameRepository.save(newName);
+        if(nameRepository.findByName(name).size()==0){
+            Names newName = new Names(name);
+            nameRepository.save(newName);
+        }
         return "redirect:/newName";
     }
 
@@ -105,8 +109,11 @@ public class AddController extends MainController{
 
     @PostMapping("/newPatronymic")
     public String addNewPatronymic(Model model, @RequestParam String name) {
-        Patronymics newPatronymic = new Patronymics(name);
-        patronymicRepository.save(newPatronymic);
+        if(patronymicRepository.findByPatronymic(name).size()==0)
+        {
+            Patronymics newPatronymic = new Patronymics(name);
+            patronymicRepository.save(newPatronymic);
+        }
         return "redirect:/newPatronymic";
     }
 }

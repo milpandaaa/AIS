@@ -165,12 +165,13 @@
                         </div>
                     </div>
 
-                    <div th:case="'E'">
-                <p class="abc_main-letter" id="Ye">E</p>
+                    <div th:case="'Е'">
+                        <p class="abc_main-letter" id="Ye">E</p>
                         <div th:each="element : ${name.getValue()}">
                             <p class="abc_author letter Ye" th:text="${element}"></p>
                         </div>
                     </div>
+
 
                     <div th:case="'Ж'">
                 <p class="abc_main-letter" id="Zh">Ж</p>
@@ -1660,9 +1661,6 @@
         $('.letter-Ya').appendTo( $('.abc_col-4') );
     }
 
-    checkWidth();
-    // Bind event listener
-    $(window).resize(checkWidth);
 </script>
 </body>
 </html>

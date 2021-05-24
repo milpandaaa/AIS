@@ -25,10 +25,23 @@ public class EditController extends MainController{
         card.ifPresent(res::add);
         model.addAttribute("card", res);
 
-        Optional<Referral> referral = referralRepository.findByCard(id);
-        ArrayList<Referral> referrals = new ArrayList<>();
-        referral.ifPresent(referrals::add);
-        model.addAttribute("referral", referrals);
+        ArrayList<Referral> referrals = (ArrayList<Referral>) referralRepository
+                .findAllByCard(res.get(0));
+        Referral lastReferral;
+        if(referrals.size()>0){
+            if(referrals.get(referrals.size()-1).getDate_arrival().length()==0
+                    && referrals.get(referrals.size()-1).getOffice_arrival()==null) {
+                lastReferral = new Referral(referrals.get(referrals.size() - 1));
+                referrals.remove(referrals.size()-1);
+            }
+            else{
+                lastReferral = new Referral(res.get(0));
+            }
+        }
+        else
+            lastReferral = new Referral(card.get());
+        model.addAttribute("lastReferral", lastReferral);
+        model.addAttribute("referrals", referrals);
 
         addModel(model);
         model.addAttribute("title", "Изменения административного правонарушения");
@@ -83,15 +96,37 @@ public class EditController extends MainController{
         card.setDate_sentence_enforcement(date_sentence_enforcement);
         card.setAmount(amount);
 
-        Referral referral = referralRepository.findByCard(id).get();
-        referral.setDate_departure(date_departure);
-        referral.setOffice_departure(office_departure);
-        referral.setDate_arrival(date_arrival);
-        referral.setOffice_arrival(office_arrival);
-
         cardRepository.save(card);
-        referralRepository.save(referral);
-        return "redirect:/all";//переход на шаблон main.html
+
+        if(date_departure.length()!=0 && office_departure!=null && date_arrival.length()!=0
+        && office_arrival!=null){
+            ArrayList<Referral> referralList = (ArrayList<Referral>) referralRepository.findAllByCard(card);
+
+            if(referralList.get(referralList.size()-1).getOffice_arrival()==null
+                    || referralList.get(referralList.size()-1).getDate_arrival().length()==0){
+                Referral referral = referralList.get(referralList.size()-1);
+                referral.setDate_departure(date_departure);
+                referral.setOffice_departure(office_departure);
+                referral.setDate_arrival(date_arrival);
+                referral.setOffice_arrival(office_arrival);
+                referralRepository.save(referral);
+            }
+
+            else{
+                Referral referral = new Referral(card, date_departure, office_departure,
+                        date_arrival, office_arrival);
+                referralRepository.save(referral);
+            }
+
+        }
+        else{
+            if(date_departure.length()!=0 && office_departure!=null){
+                Referral referral = new Referral(card, date_departure, office_departure,
+                        date_arrival, office_arrival);
+                referralRepository.save(referral);
+            }
+        }
+        return "redirect:/all";
     }
 
 

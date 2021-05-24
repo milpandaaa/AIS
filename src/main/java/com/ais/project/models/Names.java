@@ -36,4 +36,13 @@ public class Names {
     public Names(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Names{" +
+                "id_name=" + id_name +
+                ", name='" + name + '\'' +
+                ", cards=" + cards +
+                '}';
+    }
 }

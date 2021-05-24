@@ -44,5 +44,4 @@ public interface CardRepository extends CrudRepository<Card, Long> {
     public String quantityOffices();
 
 
-//    public List<Card> findByGetDateOfInitiation();
 }

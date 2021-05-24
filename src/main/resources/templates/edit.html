@@ -193,20 +193,29 @@
                     <input type="text" class="form-control" name="amount" style="margin-top:15px;" placeholder="Сумма оплаты штрафа" th:value="${el.getAmount()}">
 
                 </div>
-                <div class="col-md-4" th:each="el:${referral}">
+                <div class="col-md-4" >
                     <label>
                         Передача по подведомственности
                     </label>
+                    <div>
+                        <label th:if="referrals!=null" th:each="referral:${referrals}" >
+                            От:
+                            <p th:text="${referral.getDate_departure()}+' '+${referral.getOffice_departure().getOffice()}"></p>
+                            Кому:
+                            <p th:text="${referral.getDate_arrival()}+' '+${referral.getOffice_arrival().getOffice()}"></p>
+                        </label>
+                    </div>
+                    <hr style="background-color:#82C0CC">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar">
                             </i>
                         </div>
                         <p style="margin-top:15px;margin-right:15px">От:</p>
-                        <input class="form-control" id="date" onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_departure()}"/>
+                        <input class="form-control" id="date" onchange="checkAfterDate('date_departure', 'date_of_commission')" name="date_departure" placeholder="YYYY-MM-DD" type="text" th:value="${lastReferral.getDate_departure()}"/>
                     </div>
                     <select class="custom-select" name="office_departure" >
-                        <option selected="selected" th:value="${el.getOffice_departure()?.getId_office()}" th:text="${el.getOffice_departure()} ? ${el.getOffice_departure().getDepartment()}+' '+${el.getOffice_departure().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option selected="selected" th:value="${lastReferral.getOffice_departure()?.getId_office()}" th:text="${lastReferral.getOffice_departure()} ? ${lastReferral.getOffice_departure().getDepartment()}+' '+${lastReferral.getOffice_departure().getOffice()} : 'Выберете ОИАЗ' "></option>
                         <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                     </select>
                     <div class="input-group" >
@@ -215,10 +224,10 @@
                             </i>
                         </div>
                         <p style="margin-top:30px;margin-right:15px">Кому:</p>
-                        <input style="margin-top:15px;" class="form-control" id="date" onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival" placeholder="YYYY-MM-DD" type="text" th:value="${el.getDate_arrival()}"/>
+                        <input style="margin-top:15px;" class="form-control" id="date" onchange="checkAfterDate('date_arrival', 'date_departure')" name="date_arrival" placeholder="YYYY-MM-DD" type="text" th:value="${lastReferral.getDate_arrival()}"/>
                     </div>
                     <select class="custom-select" name="office_arrival" >
-                        <option selected="selected" th:value="${el.getOffice_arrival()?.getId_office()}" th:text="${el.getOffice_arrival()} ? ${el.getOffice_arrival().getDepartment()}+' '+${el.getOffice_arrival().getOffice()} : 'Выберете ОИАЗ' "></option>
+                        <option selected="selected" th:value="${lastReferral.getOffice_arrival()?.getId_office()}" th:text="${lastReferral.getOffice_arrival()} ? ${lastReferral.getOffice_arrival().getDepartment()}+' '+${lastReferral.getOffice_arrival().getOffice()} : 'Выберете ОИАЗ' "></option>
                         <option th:each="office : ${offices}" th:text="${office.getDepartment()}+' '+(${office.getOffice()})" th:value="${office.getId_office()}"></option>
                     </select>
                 </div>

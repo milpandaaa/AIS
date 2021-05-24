@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PunishmentRepository extends CrudRepository<Punishment, Integer> {
     Iterable<Punishment> findAll(Sort sort);
+
 }
